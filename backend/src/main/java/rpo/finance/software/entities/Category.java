@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Category")
+@Table(name = "category")
 public class Category {
 
     @Id
@@ -20,7 +20,7 @@ public class Category {
 
     @ManyToOne
     @JoinColumn(name = "userID", nullable = false)
-    private Long userID;
+    private User userID;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;

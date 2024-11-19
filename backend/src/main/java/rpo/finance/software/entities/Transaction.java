@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Transaction")
+@Table(name = "transaction")
 public class Transaction {
 
     @Id
@@ -21,12 +21,12 @@ public class Transaction {
     private Long transactionID;
 
     @ManyToOne
-    @JoinColumn(name = "userID", nullable = false)
-    private Long userID;
+    @JoinColumn(name = "userID" ,nullable = false)
+    private User userID;
 
     @ManyToOne
     @JoinColumn(name = "categoryID")
-    private Long categoryID;
+    private Category categoryID;
 
     @Column(name = "amount", nullable = false, precision = 12, scale = 2)
     private Double amount;
