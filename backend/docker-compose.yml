@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+#  app:
+#    build: .
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/finance_db
+#      SPRING_DATASOURCE_USERNAME: postgres
+#      SPRING_DATASOURCE_PASSWORD: postgres
+#      SPRING_LIQUIBASE_ENABLED: "true"
+#      SPRING_LIQUIBASE_CHANGELOG: classpath:db/changelog/db.changelog-master.xml
+#      SPRING_LIQUIBASE_URL: jdbc:postgresql://db:5432/finance_db
+#      SPRING_LIQUIBASE_USER: postgres
+#      SPRING_LIQUIBASE_PASSWORD: postgres
+#    depends_on:
+#      - db
+#    networks:
+#      - app-network
+      
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+#    networks:
+#      - app-network
+#
+#  frontend:
+#    build:
+#      context: /home/admin/club_card_t1_23/frontend/  # Change directory to start
+#      dockerfile: Dockerfile
+#    ports:
+#      - "80:80"
+#    depends_on:
+#      - db
+#      - app
+#    networks:
+#      - app-network
+#
+#volumes:
+#  db-data:
+#
+#networks:
+#  app-network:
+#    driver: bridge
+#
+#
+      
+      
+      
+
