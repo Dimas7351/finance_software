@@ -28,7 +28,7 @@ public class Transaction {
     @JoinColumn(name = "categoryID")
     private Category categoryID;
 
-    @Column(name = "amount", nullable = false, precision = 12, scale = 2)
+    @Column(name = "amount", nullable = false, precision = 12)
     private Double amount;
 
     @Column(name = "type", nullable = false, length = 10)
@@ -38,4 +38,3 @@ public class Transaction {
     private LocalDateTime date;
 
 }
-
