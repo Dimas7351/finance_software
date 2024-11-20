@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "BankIntegration")
+@Table(name = "bankIntegration")
 public class BankIntegration {
 
     @Id
@@ -20,7 +20,7 @@ public class BankIntegration {
 
     @ManyToOne
     @JoinColumn(name = "userID", nullable = false)
-    private Long userID;
+    private User userID;
 
     @Column(name = "bankName", nullable = false, length = 100)
     private String bankName;
@@ -30,6 +30,5 @@ public class BankIntegration {
 
     @Column(name = "status", nullable = false)
     private Boolean status = true;
-
 }
 

@@ -1,0 +1,13 @@
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/entities/BankIntegration.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/exceptions/GlobalExceptionHandler.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/exceptions/user_exceptions/EmailAlreadyExistException.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/entities/User.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/repositories/UserRepository.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/entities/Transaction.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/FinanceApplication.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/controllers/AuthController.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/entities/Category.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/config/SecurityConfig.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/services/UserService.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/DTO/UserRegistrationDTO.java
+/home/karam/Codes/finance_software/backend/src/main/java/rpo/finance/software/mappers/ClientRegistrationMapper.java
