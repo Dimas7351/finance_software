@@ -20,13 +20,13 @@ public class Category {
 
     @ManyToOne
     @JoinColumn(name = "userID", nullable = false)
-    private Long userID;
+    private User user;  // Change to reference the User entity, not Long
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
     @Column(name = "color", length = 20)
     private String color;
-
 }
+
 

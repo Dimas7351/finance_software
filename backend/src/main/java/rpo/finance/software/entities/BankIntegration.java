@@ -20,7 +20,7 @@ public class BankIntegration {
 
     @ManyToOne
     @JoinColumn(name = "userID", nullable = false)
-    private Long userID;
+    private User user;  // Change to reference the User entity, not Long
 
     @Column(name = "bankName", nullable = false, length = 100)
     private String bankName;
@@ -30,6 +30,6 @@ public class BankIntegration {
 
     @Column(name = "status", nullable = false)
     private Boolean status = true;
-
 }
+
 

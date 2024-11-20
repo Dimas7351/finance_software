@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -32,6 +33,12 @@ public class User {
     @Column(name = "currency", length = 10)
     private String currency = "USD";
 
+    @Column(name = "dateOfBirth")
+    private LocalDateTime dateOfBirth;
+
+    @Column(name = "phone", length = 15)
+    private String phone;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Category> categories;
 
@@ -40,6 +47,6 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BankIntegration> bankIntegrations;
-
 }
+
 

@@ -22,13 +22,13 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "userID", nullable = false)
-    private Long userID;
+    private User user;  // Change to reference the User entity, not Long
 
     @ManyToOne
     @JoinColumn(name = "categoryID")
-    private Long categoryID;
+    private Category category;  // Change to reference the Category entity, not Long
 
-    @Column(name = "amount", nullable = false, precision = 12, scale = 2)
+    @Column(name = "amount", nullable = false)
     private Double amount;
 
     @Column(name = "type", nullable = false, length = 10)
@@ -36,6 +36,6 @@ public class Transaction {
 
     @Column(name = "date", nullable = false)
     private LocalDateTime date;
-
 }
+
 

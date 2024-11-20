@@ -1,0 +1,189 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: your_name
+      changes:
+        - createTable:
+            tableName: "User"
+            columns:
+              - column:
+                  name: "userID"
+                  type: "SERIAL"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: "name"
+                  type: "VARCHAR(100)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "email"
+                  type: "VARCHAR(100)"
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: "password"
+                  type: "VARCHAR(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "currency"
+                  type: "VARCHAR(10)"
+                  defaultValue: "'USD'"
+              - column:
+                  name: "dateOfBirth"
+                  type: "TIMESTAMP"
+              - column:
+                  name: "phone"
+                  type: "VARCHAR(15)"
+
+  - changeSet:
+      id: 2
+      author: your_name
+      changes:
+        - createTable:
+            tableName: "Category"
+            columns:
+              - column:
+                  name: "categoryID"
+                  type: "SERIAL"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: "userID"
+                  type: "INTEGER"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "name"
+                  type: "VARCHAR(100)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "color"
+                  type: "VARCHAR(20)"
+
+  - changeSet:
+      id: 3
+      author: your_name
+      changes:
+        - createTable:
+            tableName: "Transaction"
+            columns:
+              - column:
+                  name: "transactionID"
+                  type: "SERIAL"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: "userID"
+                  type: "INTEGER"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "categoryID"
+                  type: "INTEGER"
+              - column:
+                  name: "amount"
+                  type: "NUMERIC(12,2)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "type"
+                  type: "VARCHAR(10)"
+                  constraints:
+                    check: "'type' IN ('income', 'expense')"
+              - column:
+                  name: "date"
+                  type: "TIMESTAMP"
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 4
+      author: your_name
+      changes:
+        - createTable:
+            tableName: "BankIntegration"
+            columns:
+              - column:
+                  name: "integrationID"
+                  type: "SERIAL"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: "userID"
+                  type: "INTEGER"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "bankName"
+                  type: "VARCHAR(100)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "keyAPI"
+                  type: "VARCHAR(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "status"
+                  type: "BOOLEAN"
+                  defaultValueBoolean: true
+
+  - changeSet:
+      id: 5
+      author: your_name
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: "Category"
+            baseColumnNames: "userID"
+            referencedTableName: "User"
+            referencedColumnNames: "userID"
+            constraintName: "fk_category_userID"
+            onUpdate: "NO ACTION"
+            onDelete: "NO ACTION"
+
+  - changeSet:
+      id: 6
+      author: your_name
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: "Transaction"
+            baseColumnNames: "userID"
+            referencedTableName: "User"
+            referencedColumnNames: "userID"
+            constraintName: "fk_transaction_userID"
+            onUpdate: "NO ACTION"
+            onDelete: "NO ACTION"
+
+  - changeSet:
+      id: 7
+      author: your_name
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: "Transaction"
+            baseColumnNames: "categoryID"
+            referencedTableName: "Category"
+            referencedColumnNames: "categoryID"
+            constraintName: "fk_transaction_categoryID"
+            onUpdate: "NO ACTION"
+            onDelete: "NO ACTION"
+
+  - changeSet:
+      id: 8
+      author: your_name
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: "BankIntegration"
+            baseColumnNames: "userID"
+            referencedTableName: "User"
+            referencedColumnNames: "userID"
+            constraintName: "fk_bank_integration_userID"
+            onUpdate: "NO ACTION"
+            onDelete: "NO ACTION"
