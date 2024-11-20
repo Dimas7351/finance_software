@@ -60,7 +60,7 @@ public class UserServiceTest {
 
         when(userRepository.findUserByEmail(registrationDTO.email())).thenReturn(Optional.empty());
         User user = new User(
-                null, registrationDTO.name(), registrationDTO.phone(),
+                null, registrationDTO.name(), registrationDTO.phoneNumber(),
                 registrationDTO.birthday(), registrationDTO.email(),
                 registrationDTO.password(), "USD", null, null, null
         );
