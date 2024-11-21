@@ -15,15 +15,15 @@ public class BankIntegration {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "integrationID")
+    @Column(name = "integration_id")
     private Long integrationID;
 
     @ManyToOne
-    @JoinColumn(name = "userID", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User userID;
 
     @Column(name = "bankName", nullable = false, length = 100)
-    private String bankName;
+    private String bank_name;
 
     @Column(name = "keyAPI", nullable = false, length = 255)
     private String keyAPI;

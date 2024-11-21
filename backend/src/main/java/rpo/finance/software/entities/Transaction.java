@@ -17,15 +17,15 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "transactionID")
+    @Column(name = "transaction_id")
     private Long transactionID;
 
     @ManyToOne
-    @JoinColumn(name = "userID" ,nullable = false)
+    @JoinColumn(name = "user_id" ,nullable = false)
     private User userID;
 
     @ManyToOne
-    @JoinColumn(name = "categoryID")
+    @JoinColumn(name = "category_id")
     private Category categoryID;
 
     @Column(name = "amount", nullable = false, precision = 12)
@@ -36,5 +36,4 @@ public class Transaction {
 
     @Column(name = "date", nullable = false)
     private LocalDateTime date;
-
 }
