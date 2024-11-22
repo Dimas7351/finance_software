@@ -37,13 +37,13 @@ public class AuthController {
         return ResponseEntity.ok("Пользователь успешно зарегистрирован");
     }
 
-    @PostMapping("/login/{id}/=YouTubeWeb&tab=rk&utm_medium=act&gar=WzgwLCIyMzMzODciXQ&tab=rk&hl=ru&pli=1&nlr=1")
+    @PostMapping("/login")
     @Operation(summary = "Вход пользователя")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Успешный вход"),
             @ApiResponse(responseCode = "401", description = "Неверные учетные данные")
     })
-    public ResponseEntity<String> signin(@Valid @RequestBody UserSignInDTO signInDTO, @PathVariable int id) {
+    public ResponseEntity<String> signin(@Valid @RequestBody UserSignInDTO signInDTO) {
         String response = userService.signin(signInDTO);
         return ResponseEntity.ok(response);
     }
