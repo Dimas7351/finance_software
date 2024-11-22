@@ -22,7 +22,7 @@ services:
   db:
     image: postgres:latest
     ports:
-      - "5432:5432"
+      - "5435:5432"
     environment:
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: postgres
