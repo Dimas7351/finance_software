@@ -7,8 +7,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import rpo.finance.software.exceptions.user_exceptions.EmailAlreadyExistException;
-import rpo.finance.software.exceptions.user_exceptions.InvalidCredentialsException;
 
 import java.util.HashMap;
 import java.util.Map;
