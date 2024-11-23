@@ -1,4 +1,4 @@
-package rpo.finance.software.exceptions.user_exceptions;
+package rpo.finance.software.exceptions;
 
 public class InvalidCredentialsException extends RuntimeException {
     public InvalidCredentialsException(String message) {
