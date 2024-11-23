@@ -1,23 +1,21 @@
-version: '3.8'
-
 services:
-#  app:
-#    build: .
-#    ports:
-#      - "8080:8080"
-#    environment:
-#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/finance_db
-#      SPRING_DATASOURCE_USERNAME: postgres
-#      SPRING_DATASOURCE_PASSWORD: postgres
-#      SPRING_LIQUIBASE_ENABLED: "true"
-#      SPRING_LIQUIBASE_CHANGELOG: classpath:db/changelog/db.changelog-master.xml
-#      SPRING_LIQUIBASE_URL: jdbc:postgresql://db:5432/finance_db
-#      SPRING_LIQUIBASE_USER: postgres
-#      SPRING_LIQUIBASE_PASSWORD: postgres
-#    depends_on:
-#      - db
-#    networks:
-#      - app-network
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db/finance_software_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_FLYWAY_ENABLED: "false"
+      SPRING_FLYWAY_URL: jdbc:postgresql://db/finance_software_db
+      SPRING_FLYWAY_USER: postgres
+      SPRING_FLYWAY_PASSWORD: postgres
+
+    depends_on:
+      - db
+    networks:
+      - rpo-network
       
   db:
     image: postgres:latest
@@ -28,8 +26,8 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-#    networks:
-#      - app-network
+    networks:
+      - rpo-network
 #
 #  frontend:
 #    build:
@@ -46,11 +44,11 @@ services:
 #volumes:
 #  db-data:
 #
-#networks:
-#  app-network:
-#    driver: bridge
-#
-#
+networks:
+  rpo-network:
+    driver: bridge
+
+
       
       
       
