@@ -21,7 +21,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @Column(name = "userID")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(name = "userID", example = "1", required = true, description = "Уникальный идентификатор пользователя.")
     private Long userID;

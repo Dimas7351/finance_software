@@ -12,6 +12,9 @@ import rpo.finance.software.DTO.user.UserRegistrationDTO;
 import rpo.finance.software.DTO.user.UserSignInDTO;
 import rpo.finance.software.services.UserService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 @Tag(name = "getting Account API", description = "Операции, связанные с регистрацией и авторизацией пользователей")
@@ -43,8 +46,15 @@ public class AuthController {
             @ApiResponse(responseCode = "200", description = "Успешный вход"),
             @ApiResponse(responseCode = "401", description = "Неверные учетные данные")
     })
-    public ResponseEntity<String> signin(@Valid @RequestBody UserSignInDTO signInDTO) {
-        String response = userService.signin(signInDTO);
+    public ResponseEntity<Map<String, String>> signin(@Valid @RequestBody UserSignInDTO signInDTO) {
+
+        // Метод service, который возвращает JWT токен
+        String token = userService.signin(signInDTO);
+
+        // Ответ с токеном
+        Map<String, String> response = new HashMap<>();
+        response.put("token", token);
+
         return ResponseEntity.ok(response);
     }
 }

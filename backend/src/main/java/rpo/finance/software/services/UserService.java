@@ -10,18 +10,24 @@ import rpo.finance.software.exceptions.user_exceptions.EmailAlreadyExistExceptio
 import rpo.finance.software.exceptions.user_exceptions.InvalidCredentialsException;
 import rpo.finance.software.mappers.ClientRegistrationMapper;
 import rpo.finance.software.repositories.UserRepository;
+import rpo.finance.software.jwt.JwtTokenUtil;
 
 @Service
 public class UserService {
     private final ClientRegistrationMapper clientRegistrationMapper;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenUtil jwtTokenUtil; //JWT токен
 
     @Autowired
-    public UserService(ClientRegistrationMapper clientRegistrationMapper, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(ClientRegistrationMapper clientRegistrationMapper,
+                       UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       JwtTokenUtil jwtTokenUtil) {
         this.clientRegistrationMapper = clientRegistrationMapper;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtTokenUtil = jwtTokenUtil; //JWT токен
     }
 
     public void registerUser(UserRegistrationDTO userDTO) {
@@ -43,6 +49,8 @@ public class UserService {
         if (!passwordEncoder.matches(userSignInDTO.password(), user.getPassword())) {
             throw new InvalidCredentialsException("Неверные учетные данные");
         }
-        return "Успешный вход";
+
+        // Генерация JWT токена
+        return jwtTokenUtil.generateToken(user.getEmail());
     }
 }
