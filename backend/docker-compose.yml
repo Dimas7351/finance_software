@@ -4,19 +4,18 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db/finance_software_db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/finance_software_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
       SPRING_FLYWAY_ENABLED: "false"
-      SPRING_FLYWAY_URL: jdbc:postgresql://db/finance_software_db
+      SPRING_FLYWAY_URL: jdbc:postgresql://db:5432/finance_software_db
       SPRING_FLYWAY_USER: postgres
       SPRING_FLYWAY_PASSWORD: postgres
-
     depends_on:
       - db
     networks:
-      - rpo-network
-      
+      - web
+
   db:
     image: postgres:latest
     ports:
@@ -27,29 +26,8 @@ services:
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     networks:
-      - rpo-network
-#
-#  frontend:
-#    build:
-#      context: /home/admin/club_card_t1_23/frontend/  # Change directory to start
-#      dockerfile: Dockerfile
-#    ports:
-#      - "80:80"
-#    depends_on:
-#      - db
-#      - app
-#    networks:
-#      - app-network
-#
-#volumes:
-#  db-data:
-#
+      - web
+
 networks:
-  rpo-network:
-    driver: bridge
-
-
-      
-      
-      
-
+  web:
+    name: web
