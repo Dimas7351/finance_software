@@ -33,9 +33,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Отключаем CSRF-защиту, т.к. используем JWT
                 .authorizeHttpRequests(auth -> auth
                         // JWT токен: разрешаем доступ к маршрутам авторизации без аутентификации
-                        .requestMatchers("/auth/**").permitAll()
                         // JWT токен: для всех остальных маршрутов требуется аутентификация
+                        .requestMatchers(
+                                "/swagger-ui/**",  // Swagger UI статические файлы
+                                "/v3/api-docs/**", // API-документация
+                                "/auth/**"        // Ваши публичные эндпоинты авторизации
+                        ).permitAll()
                         .anyRequest().authenticated()
+
                 )
                 // JWT токен: добавляем кастомный фильтр перед стандартным фильтром аутентификации
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
