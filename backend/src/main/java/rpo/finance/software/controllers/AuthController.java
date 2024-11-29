@@ -11,13 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rpo.finance.software.DTO.user.UserRegistrationDTO;
 import rpo.finance.software.DTO.user.UserSignInDTO;
-import rpo.finance.software.entities.ConfirmationToken;
-import rpo.finance.software.entities.User;
-import rpo.finance.software.services.email.ConfirmationTokenService;
 import rpo.finance.software.services.user.LoginService;
 import rpo.finance.software.services.user.RegistrationService;
-
-import java.time.LocalDateTime;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +25,6 @@ public class AuthController {
 
     private final RegistrationService registrationService;
     private final LoginService loginService;
-    private final ConfirmationTokenService tokenService;
 
     @PostMapping("/signup")
     @Operation(summary = "Данные для регистрации пользователя")
@@ -75,7 +69,7 @@ public class AuthController {
     public ResponseEntity<Map<String, String>> signin(@Valid @RequestBody UserSignInDTO signInDTO) {
 
         // Метод service, который возвращает JWT токен
-        String token = userService.signin(signInDTO);
+        String token = loginService.signin(signInDTO);
 
         // Ответ с токеном
         Map<String, String> response = new HashMap<>();
