@@ -56,6 +56,11 @@ public class User {
             description = "Электронная почта пользователя. Должна быть уникальной и в правильном формате.")
     private String email;
 
+    @Column(name = "is_verified")
+    @Schema(name = "isVerified", example = "false",
+            description = "Электронная почта должна быть подтверждена с помощью верификации по электронной почте")
+    private Boolean isVerified = false;
+
     @Column(name = "password", nullable = false, length = 255)
     @Size(min = 7, max = 255, message = "Пароль должна быть от 7 символов")
     @Schema(name = "password", example = "pass123123", required = true,
@@ -77,5 +82,7 @@ public class User {
     @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
     @Schema(description = "Список банковских интеграций пользователя.")
     private List<BankIntegration> bankIntegrations;
+
+
 }
 

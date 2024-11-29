@@ -18,6 +18,7 @@ public class ClientRegistrationMapper implements Function<UserRegistrationDTO, U
                 .birthday(userRegistrationDTO.birthday())
                 .phoneNumber(userRegistrationDTO.phoneNumber())
                 .currency("USD")
+                .isVerified(false)
                 .build();
     }
 }
