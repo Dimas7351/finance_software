@@ -1,0 +1,61 @@
+<script>
+import { defineComponent, computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+export default defineComponent({
+  name: 'ProgressBar',
+  props: {
+    stepsCount: {
+      type: Number,
+      default: 3,
+    },
+  },
+  setup(props) {
+    const route = useRoute();
+
+    const stepsCount = props.stepsCount;
+
+    const stepNumber = computed(() => Number(route.query.step) || 0);
+
+    const isActive = (activeStep) => {
+      return activeStep <= Number(stepNumber.value);
+    };
+
+    return {
+      stepNumber,
+      stepsCount,
+      isActive,
+    };
+  },
+});
+</script>
+
+<template>
+  <div
+    class="progress-bar"
+    :style="{
+      '--steps-count': stepsCount,
+      '--current-step': stepNumber,
+      '--progress': `${((stepNumber - 1) / (stepsCount - 1)) * 100}%`,
+    }"
+  >
+    <div
+      v-for="step in stepsCount"
+      class="progress-bar__status"
+      :class="{ '--active': isActive(step) }"
+    ></div>
+  </div>
+</template>
+
+<style scoped>
+.progress-bar {
+  --progress: calc(var(--current-step) / var(--steps-count) * 100);
+  transition: background-color 0.3s;
+  background: linear-gradient(
+    to right,
+    var(--color-primary) 0,
+    var(--color-primary) var(--progress),
+    var(--color-background-disabled) var(--progress)
+  );
+}
+</style>

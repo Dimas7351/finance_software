@@ -8,6 +8,7 @@ export default defineComponent({
 </script>
 
 <template>
-  GreetingsLayout
-  <RouterView />
+  <div class="container">
+    <router-view />
+  </div>
 </template>

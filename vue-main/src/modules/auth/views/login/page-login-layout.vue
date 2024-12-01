@@ -8,6 +8,7 @@ export default defineComponent({
 </script>
 
 <template>
-  LoginLayout
-  <RouterView />
+  <div>
+    <router-view />
+  </div>
 </template>

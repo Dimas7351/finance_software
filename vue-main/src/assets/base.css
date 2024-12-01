@@ -1,15 +1,13 @@
 :root {
-  /* --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px; */
+  --color-text: black;
+  --color-background: #e3e3e3;
+  --color-border: #85BB65;
+  --color-primary: var(--color-border);
+  --input-color-border: rgba(0, 0, 0, 0.40);
+  --input-border-radius: 10px;
+  --card-container-border-radius: 25px;
+  --color-background-disabled: #B9B9B9;
+  --white: white;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,7 +40,7 @@ body {
     color 0.5s,
     background-color 0.5s;
   line-height: normal;
-  font-family: Roboto;
+  font-family: 'Roboto', 'Roboto Condensed', sans-serif;
   font-size: 20px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
