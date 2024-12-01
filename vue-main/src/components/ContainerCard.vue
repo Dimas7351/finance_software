@@ -8,6 +8,18 @@ export default defineComponent({
       type: String,
       default: null,
     },
+    headerClass: {
+      type: String,
+      default: null,
+    },
+    bodyClass: {
+      type: String,
+      default: null,
+    },
+    footerClass: {
+      type: String,
+      default: null,
+    },
   },
   setup() {},
 });
@@ -15,15 +27,16 @@ export default defineComponent({
 
 <template>
   <div class="card">
-    <div class="card__header --user-select-none">
+    <div class="card__header --user-select-none" :class="headerClass">
       <span class="card__header__text" v-if="headerText">{{ headerText }}</span>
       <slot name="card-header"></slot>
     </div>
 
-    <div class="card__body">
+    <div class="card__body" :class="bodyClass">
       <slot name="card-body"></slot>
     </div>
-    <div class="card__footer">
+
+    <div class="card__footer" :class="footerClass">
       <slot name="card-footer"></slot>
     </div>
   </div>

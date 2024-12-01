@@ -27,11 +27,11 @@ export default defineComponent({
           <router-link
             class="button"
             :to="{
-              path: '/sign-up',
-              query: { step: 1 },
+              name: 'PageSignUpFirst'
             }"
-            >Регистрация</router-link
           >
+            Регистрация
+          </router-link>
         </div>
       </template>
     </ContainerCard>

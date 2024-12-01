@@ -15,9 +15,19 @@ export const authRoutes = [
         component: () => import('@/modules/auth/views/sign-up/page-sign-up-layout.vue'),
         children: [
           {
-            path: '',
+            path: 'step-1',
             name: 'PageSignUpFirst',
             component: () => import('@/modules/auth/views/sign-up/page-sign-up-first.vue'),
+          },
+          {
+            path: 'step-2',
+            name: 'PageSignUpSecond',
+            component: () => import('@/modules/auth/views/sign-up/page-sign-up-second.vue'),
+          },
+          {
+            path: 'step-3',
+            name: 'PageSignUpThird',
+            component: () => import('@/modules/auth/views/sign-up/page-sign-up-third.vue'),
           },
         ],
       },

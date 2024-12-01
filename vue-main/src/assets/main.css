@@ -1,5 +1,9 @@
 @import './base.css';
 
+a {
+  text-decoration: none;
+}
+
 /* Container */
 .container {
   display: flex;
@@ -41,8 +45,9 @@
 
 .card__body {
   display: flex;
+  flex-direction: column;
   text-align: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   font-size: 20px;
   margin-bottom: 55px;
@@ -176,6 +181,26 @@ a.button {
   box-shadow: none;
 }
 
+.form-group .radio-group {
+  width: 100%;
+  padding: 11px 27px;
+  border-radius: var(--input-border-radius);
+  border: 1px solid var(--input-color-border);
+}
+
+.form-group .radio-group {
+  margin-bottom: -13px;
+}
+
+
+.form-group .radio-group label {
+  margin-bottom: 0;
+}
+
+.form-group .radio-group input {
+  margin-right: 8px;
+}
+
 /* CSS-icons */
 
 .question-icon {
@@ -209,6 +234,62 @@ a.button {
   line-height: 1;
 }
 
+.arrow-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 50%;
+  color: var(--color-background-disabled);
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid var(--color-background-disabled);
+  transition:
+    background-color 0.3s ease,
+    border 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.15s ease-in-out,
+    transform 0.15s ease-in-out;
+}
+
+.arrow-icon:hover,
+.arrow-icon:focus,
+.arrow-icon.focus {
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  text-decoration: none;
+  box-shadow: 0 8px 8px -6.4px var(--color-border);
+  transform: translateY(-2px);
+}
+
+.arrow-icon .arrow-left {
+  line-height: 1;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.arrow-icon .arrow-left::before {
+  content: '🠔';
+}
+
+.arrow-icon .arrow-right {
+  line-height: 1;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.arrow-icon .arrow-right::before {
+  content: '🠖';
+}
+
+a.arrow-icon {
+  text-decoration: none;
+}
+
 /* Modifiers */
 
 .--user-select-none {
@@ -220,10 +301,19 @@ a.button {
   flex-direction: column;
 }
 
+.--justify-content-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .--flex-row {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.--text-left {
+  text-align: left;
 }
 
 .--w-100 {

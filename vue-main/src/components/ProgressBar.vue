@@ -1,6 +1,5 @@
 <script>
-import { defineComponent, computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'ProgressBar',
@@ -9,16 +8,19 @@ export default defineComponent({
       type: Number,
       default: 3,
     },
+    stepNumber: {
+      type: Number,
+      default: 0
+    }
   },
   setup(props) {
-    const route = useRoute();
 
     const stepsCount = props.stepsCount;
 
-    const stepNumber = computed(() => Number(route.query.step) || 0);
+    const stepNumber = props.stepNumber;
 
     const isActive = (activeStep) => {
-      return activeStep <= Number(stepNumber.value);
+      return activeStep <= Number(stepNumber);
     };
 
     return {
