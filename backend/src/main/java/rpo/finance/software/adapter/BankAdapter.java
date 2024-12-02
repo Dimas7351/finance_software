@@ -30,4 +30,15 @@ public class BankAdapter {
         System.out.println(str.getBody());
         return str;
     }
+
+    public ResponseEntity<String> generate(Long userId){
+        URI url = UriComponentsBuilder.fromHttpUrl(ur)
+                .path("/generate")
+                .build()
+                .toUri();
+        ResponseEntity<String> str = restTemplate.exchange(ur+"/generate/{userId}",
+                HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class, userId);
+        System.out.println(str.getBody());
+        return str;
+    }
 }

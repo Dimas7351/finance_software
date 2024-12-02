@@ -1,4 +1,4 @@
-package rpo.finance.software.entities;
+package bank.develop.entities;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -71,13 +71,9 @@ public class User {
     private String currency = "USD";
 
 //    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @Schema(description = "Список категорий, связанных с пользователем.")
-//    private List<Category> categories;
-//
-//    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @Schema(description = "Список транзакций, совершенных пользователем.")
 //    private List<Transaction> transactions;
-//
+
 //    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @Schema(description = "Список банковских интеграций пользователя.")
 //    private List<BankIntegration> bankIntegrations;
