@@ -11,6 +11,7 @@ export default defineComponent({
     const route = useRoute();
     const modelValue = ref(null);
     const lastStep = ref(false);
+    const isBack = ref(false); // Состояние для направления
 
     const handleModelValueChange = (value) => {
       modelValue.value = value;
@@ -43,11 +44,18 @@ export default defineComponent({
       }
     });
 
+    const navigate = (direction) => {
+      isBack.value = direction === 'back';
+    };
+
     return {
       route,
       stepInfo,
       modelValue,
       handleModelValueChange,
+      handleLastStepEvent,
+      isBack,
+      navigate,
     };
   },
 });
@@ -57,7 +65,7 @@ export default defineComponent({
   <div class="container">
     <ContainerCard header-text="Регистрация" footer-class="--w-100" :key="stepInfo.stepNumber">
       <template #card-header>
-        <ProgressBar :steps-count="3" :stepNumber="stepInfo.stepNumber" />
+        <ProgressBar :steps-count="3" :stepNumber="stepInfo.stepNumber" :is-back="isBack" />
       </template>
       <template #card-body>
         <router-view
@@ -72,31 +80,25 @@ export default defineComponent({
         </router-view>
       </template>
       <template #card-footer>
-        <router-link
-          :to="{
-            name: stepInfo.back,
-          }"
-        >
+        <router-link :to="{ name: stepInfo.back }" @click.prevent="navigate('back')">
           <div class="arrow-icon">
             <i class="arrow-left"></i>
           </div>
         </router-link>
+
         <router-link
-          class="button button-sm"
-          v-if="(stepInfo.uploadType !== undefined && stepInfo.uploadType === 'manual') || stepInfo.lastStep"
-          :to="{
-            name: stepInfo.next,
-          }"
+        class="button button-sm"
+          v-if="
+            (stepInfo.uploadType !== undefined && stepInfo.uploadType === 'manual') ||
+            stepInfo.lastStep
+          "
+          :to="{ name: stepInfo.next }"
+          @click.prevent="navigate('next')"
         >
           Завершить
         </router-link>
 
-        <router-link
-          v-else
-          :to="{
-            name: stepInfo.next,
-          }"
-        >
+        <router-link v-else :to="{ name: stepInfo.next }" @click.prevent="navigate('next')">
           <div class="arrow-icon">
             <i class="arrow-right"></i>
           </div>

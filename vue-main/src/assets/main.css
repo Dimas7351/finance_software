@@ -68,7 +68,7 @@ a {
 
 /* Progress bar */
 
-.progress-bar {
+/* .progress-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -90,7 +90,7 @@ a {
 
 .progress-bar__status.--active {
   background-color: var(--color-primary);
-}
+} */
 
 /* Card greetings */
 .card__footer .--greetings {
