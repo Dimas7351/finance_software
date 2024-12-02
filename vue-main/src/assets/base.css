@@ -1,12 +1,13 @@
 :root {
   --color-text: black;
   --color-background: #e3e3e3;
-  --color-border: #85BB65;
+  --color-border: #85bb65;
+  --color-card-border: rgba(133, 187, 101, 0.50);
   --color-primary: var(--color-border);
-  --input-color-border: rgba(0, 0, 0, 0.40);
-  --input-border-radius: 10px;
+  --input-color-border: rgba(0, 0, 0, 0.4);
+  --input-border-radius: 5px;
   --card-container-border-radius: 25px;
-  --color-background-disabled: #B9B9B9;
+  --color-background-disabled: #b9b9b9;
   --white: white;
 }
 
@@ -41,8 +42,64 @@ body {
     background-color 0.5s;
   line-height: normal;
   font-family: 'Roboto', 'Roboto Condensed', sans-serif;
-  font-size: 20px;
+  font-size: 17px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Route Changing Animations */
+
+/* Анимация "fade" */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+
+/* Анимация "slide-left" */
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: transform 0.3s ease;
+}
+.slide-left-enter-from {
+  transform: translateX(100%);
+}
+.slide-left-leave-to {
+  transform: translateX(-100%);
+}
+
+/* Анимация "slide-right" */
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: transform 0.3s ease;
+}
+.slide-right-enter-from {
+  transform: translateX(-100%);
+}
+.slide-right-leave-to {
+  transform: translateX(100%);
+}
+
+/* Анимация "zoom" */
+.zoom-enter-active,
+.zoom-leave-active {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+.zoom-enter-from {
+  transform: scale(0.8);
+  opacity: 0;
+}
+.zoom-leave-to {
+  transform: scale(1);
+  opacity: 0;
 }

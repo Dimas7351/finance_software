@@ -24,7 +24,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div style="width: 350px">
+  <div style="width: 344px">
     <div class="form-group">
       <label for="name"> Имя </label>
       <div class="--flex-row --w-100">
@@ -53,7 +53,7 @@ export default defineComponent({
       <label for="login">Логин</label>
       <div class="--flex-row --w-100">
         <input id="login" class="form-input" v-model="form.login" />
-        <Tooltip :tooltip-font-size="'14px'" width="300px" position="right">
+        <Tooltip :tooltip-font-size="'14px'" width="350px" position="right">
           <template #element>
             <span class="question-icon --ml-3">?</span>
           </template>
@@ -66,8 +66,8 @@ export default defineComponent({
     <div class="form-group">
       <label for="password">Пароль</label>
       <div class="--flex-row --w-100">
-        <input id="password" class="form-input" v-model="form.password" />
-        <Tooltip :tooltip-font-size="'14px'" width="300px" position="right">
+        <input type="password" id="password" class="form-input" v-model="form.password" />
+        <Tooltip :tooltip-font-size="'14px'" width="350px" position="right">
           <template #element>
             <span class="question-icon --ml-3">?</span>
           </template>
@@ -81,8 +81,13 @@ export default defineComponent({
     <div class="form-group">
       <label for="passwordConfirm">Повторите пароль</label>
       <div class="--flex-row --w-100">
-        <input id="passwordConfirm" class="form-input" v-model="form.passwordConfirm" />
-        <Tooltip :tooltip-font-size="'14px'" width="300px" position="right">
+        <input
+          type="password"
+          id="passwordConfirm"
+          class="form-input"
+          v-model="form.passwordConfirm"
+        />
+        <Tooltip :tooltip-font-size="'14px'" width="350px" position="right">
           <template #element>
             <span class="question-icon --ml-3">?</span>
           </template>

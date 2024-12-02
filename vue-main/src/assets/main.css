@@ -18,15 +18,19 @@ a {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 800px;
+  justify-content: space-between;
+  font-size: 17px;
+  width: 740px;
+  height: 730px;
   padding: 20px 25px;
   margin: auto;
   border-radius: var(--card-container-border-radius);
   background-color: var(--white);
-  border: 1px var(--color-border) solid;
-  box-shadow:
-    1px 2px 2px rgba(0, 0, 0, 0.1),
-    -1px 2px 2px rgba(0, 0, 0, 0.1);
+  border: 1px var(--color-card-border) solid;
+}
+
+.card.--greetings {
+  height: auto;
 }
 
 .card__header {
@@ -35,8 +39,8 @@ a {
   align-items: center;
   justify-content: center;
   width: 100%;
-  font-size: 30px;
-  margin-bottom: 33px;
+  font-size: 25px;
+  font-family: 'Roboto Condensed';
 }
 
 .card__header__text {
@@ -49,14 +53,17 @@ a {
   text-align: center;
   align-items: flex-start;
   width: 100%;
-  font-size: 20px;
-  margin-bottom: 55px;
+  font-size: 17px;
 }
 
 .card__footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.card__footer.--greetings {
+  margin-top: 43px;
 }
 
 /* Progress bar */
@@ -93,10 +100,6 @@ a {
   width: 643px;
 }
 
-.card__footer .--greetings > .button {
-  width: 180px;
-}
-
 /* Buttons */
 .button {
   display: inline-block;
@@ -106,7 +109,7 @@ a {
   vertical-align: middle;
   user-select: none;
   background-color: transparent;
-  border: 2px solid var(--color-border);
+  border: 2px solid var(--color-text);
   padding: 6px 12px;
   font-size: 16px;
   line-height: 1.5;
@@ -114,9 +117,7 @@ a {
   transition:
     color 0.15s ease-in-out,
     background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out,
-    transform 0.15s ease-in-out;
+    border-color 0.15s ease-in-out;
 }
 
 .button:hover,
@@ -124,8 +125,9 @@ a {
 .button.focus {
   color: #212529;
   text-decoration: none;
-  box-shadow: 0 8px 8px -6.4px var(--color-border);
-  transform: translateY(-2px);
+  border-color: var(--color-primary);
+  /* box-shadow: 0 8px 8px -6.4px var(--color-border);
+  transform: translateY(-2px); */
 }
 
 .button.disabled,
@@ -143,6 +145,16 @@ fieldset:disabled a.button {
 
 a.button {
   text-decoration: none;
+  border: 2px solid var(--color-text);
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.3s ease-in-out;
+}
+
+.button.button-sm {
+  padding: 6px 20px;
+  border-radius: 10px;
 }
 
 /* Inputs */
@@ -155,7 +167,7 @@ a.button {
 }
 
 .form-group label {
-  font-size: 16px;
+  font-size: 17px;
   margin-bottom: 8px;
 }
 
@@ -165,12 +177,18 @@ a.button {
   width: 100%;
   text-align: left;
   padding: 10px 15px;
+  font-size: 15px;
   color: var(--color-text);
   border-radius: var(--input-border-radius);
   border: 1.5px solid var(--input-color-border);
   transition:
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
+}
+
+.form-input.form-input-phone {
+  width: 158px;
+  padding: 10px 12px;
 }
 
 .form-input:focus,
@@ -183,15 +201,18 @@ a.button {
 
 .form-group .radio-group {
   width: 100%;
-  padding: 11px 27px;
-  border-radius: var(--input-border-radius);
+  height: 40px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 15px;
   border: 1px solid var(--input-color-border);
+  cursor: pointer;
+  user-select: none;
 }
 
 .form-group .radio-group {
   margin-bottom: -13px;
 }
-
 
 .form-group .radio-group label {
   margin-bottom: 0;
@@ -201,19 +222,55 @@ a.button {
   margin-right: 8px;
 }
 
+.radio-group input[type='radio']:checked {
+  background-color: var(--color-primary);
+}
+
+/* Bank Logos */
+
+.form-group .bank-logo {
+  margin-right: 20px;
+  margin-left: 12px;
+}
+
+.bank-logo {
+  display: block;
+  width: 70px;
+  height: 28px;
+  background-repeat: no-repeat;
+  background-clip: border-box;
+  background-size: cover;
+}
+
+.--tinkoff {
+  background-image: url('/TBank.svg');
+}
+
+.--sber {
+  background-image: url('/Sber.svg');
+}
+
+.--alfa {
+  background-image: url('/Alfa.svg');
+}
+
+.--vtb {
+  background-image: url('/VTB.svg');
+}
+
 /* CSS-icons */
 
 .question-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   background-color: transparent;
   border-radius: 50%;
   color: var(--color-background-disabled);
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 400;
   text-align: center;
   cursor: pointer;
   border: 1px solid var(--color-background-disabled);
@@ -238,18 +295,17 @@ a.button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  width: 46px;
+  height: 46px;
   background-color: transparent;
   border-radius: 50%;
-  color: var(--color-background-disabled);
-  font-size: 16px;
+  color: var(--color-text);
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
-  border: 1px solid var(--color-background-disabled);
+  border: 2px solid var(--color-text);
   transition:
-    background-color 0.3s ease,
     border 0.3s ease,
     color 0.3s ease,
     box-shadow 0.15s ease-in-out,
@@ -259,17 +315,16 @@ a.button {
 .arrow-icon:hover,
 .arrow-icon:focus,
 .arrow-icon.focus {
-  border: 1px solid var(--color-primary);
-  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  /* color: var(--color-primary); */
   text-decoration: none;
-  box-shadow: 0 8px 8px -6.4px var(--color-border);
-  transform: translateY(-2px);
+  /* box-shadow: 0 8px 8px -6.4px var(--color-border);
+  transform: translateY(-2px); */
 }
 
 .arrow-icon .arrow-left {
   line-height: 1;
   font-weight: 700;
-  font-size: 24px;
 }
 
 .arrow-icon .arrow-left::before {
@@ -279,7 +334,6 @@ a.button {
 .arrow-icon .arrow-right {
   line-height: 1;
   font-weight: 700;
-  font-size: 24px;
 }
 
 .arrow-icon .arrow-right::before {
@@ -312,12 +366,28 @@ a.arrow-icon {
   align-items: center;
 }
 
+.--text-nowrap {
+  text-wrap: nowrap;
+}
+
+.--mb-0 {
+  margin-bottom: 0 !important;
+}
+
 .--text-left {
   text-align: left;
 }
 
 .--w-100 {
   width: 100%;
+}
+
+.--mb-1 {
+  margin-bottom: 4px;
+}
+
+.--mb-2 {
+  margin-bottom: 8px;
 }
 
 .--ml-1 {

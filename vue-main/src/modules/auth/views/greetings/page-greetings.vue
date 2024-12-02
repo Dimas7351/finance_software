@@ -11,23 +11,22 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <ContainerCard header-text="Привет!">
+    <ContainerCard header-text="Здравствуйте!" card-class="--greetings" footer-class="--greetings">
       <template #card-body>
         <span class="--user-select-none">
-          <h3>Рады приветствовать вас в приложении BeBro!</h3>
-          <br />
-          Здесь вы сможете получить детальную аналитику по своим банковским аккаунтам, получить
-          прогнозы на текущий месяц, советы по экономии и другое
+          Рады приветствовать вас в приложении “”! Здесь вы сможете получить детальную аналитику по
+          своим банковским аккаунтам, получить прогнозы на текущий месяц, советы по экономии и
+          другое. Приступим!
         </span>
       </template>
 
       <template #card-footer>
         <div class="--greetings">
-          <router-link class="button" to="/sign-in">Вход</router-link>
+          <router-link class="button button-sm" to="/sign-in">Вход</router-link>
           <router-link
-            class="button"
+            class="button button-sm"
             :to="{
-              name: 'PageSignUpFirst'
+              name: 'PageSignUpFirst',
             }"
           >
             Регистрация

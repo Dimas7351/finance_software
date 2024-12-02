@@ -20,13 +20,17 @@ export default defineComponent({
       type: String,
       default: null,
     },
+    cardClass: {
+      type: String,
+      default: null
+    }
   },
   setup() {},
 });
 </script>
 
 <template>
-  <div class="card">
+  <div class="card" :class="cardClass">
     <div class="card__header --user-select-none" :class="headerClass">
       <span class="card__header__text" v-if="headerText">{{ headerText }}</span>
       <slot name="card-header"></slot>

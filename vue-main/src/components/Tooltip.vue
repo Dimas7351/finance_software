@@ -47,7 +47,7 @@ export default {
     },
     maxWidth: {
       type: String,
-      default: '350px',
+      default: '500px',
     },
     elementHtml: {
       type: String,
@@ -158,7 +158,6 @@ export default {
   border-radius: 5px;
   z-index: 1020;
   pointer-events: none;
-  backdrop-filter: saturate(180%) blur(18px);
   transition:
     clip-path 0.3s ease,
     opacity 0.3s ease;

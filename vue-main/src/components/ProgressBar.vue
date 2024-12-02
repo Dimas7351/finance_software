@@ -10,11 +10,10 @@ export default defineComponent({
     },
     stepNumber: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   setup(props) {
-
     const stepsCount = props.stepsCount;
 
     const stepNumber = props.stepNumber;
@@ -52,7 +51,7 @@ export default defineComponent({
 <style scoped>
 .progress-bar {
   --progress: calc(var(--current-step) / var(--steps-count) * 100);
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease-in-out;
   background: linear-gradient(
     to right,
     var(--color-primary) 0,
