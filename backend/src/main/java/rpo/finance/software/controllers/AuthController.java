@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rpo.finance.software.DTO.user.UserRegistrationDTO;
 import rpo.finance.software.DTO.user.UserSignInDTO;
+import rpo.finance.software.adapter.BankAdapter;
 import rpo.finance.software.services.user.LoginService;
 import rpo.finance.software.services.user.RegistrationService;
 
@@ -36,6 +37,7 @@ public class AuthController {
     })
     public ResponseEntity<String> signup(@Valid @RequestBody UserRegistrationDTO registration) {
         registrationService.registerUser(registration);
+
         return ResponseEntity.ok("Пользователь успешно зарегистрирован." +
                 " Пожалуйста, подтвердите свою учетную запись через ссылку, отправленную на вашу электронную почту.\n");
     }
