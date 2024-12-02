@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import rpo.finance.software.DTO.user.UserRegistrationDTO;
 import rpo.finance.software.DTO.user.UserSignInDTO;
 import rpo.finance.software.adapter.BankAdapter;
+import rpo.finance.software.repositories.UserRepository;
 import rpo.finance.software.services.user.LoginService;
 import rpo.finance.software.services.user.RegistrationService;
 
@@ -26,6 +27,8 @@ public class AuthController {
 
     private final RegistrationService registrationService;
     private final LoginService loginService;
+    private final BankAdapter bankAdapter;
+    private final UserRepository userRepository;
 
     @PostMapping("/signup")
     @Operation(summary = "Данные для регистрации пользователя")
@@ -41,6 +44,8 @@ public class AuthController {
         return ResponseEntity.ok("Пользователь успешно зарегистрирован." +
                 " Пожалуйста, подтвердите свою учетную запись через ссылку, отправленную на вашу электронную почту.\n");
     }
+
+
 
     @GetMapping("/verify")
     @Operation(
@@ -72,6 +77,7 @@ public class AuthController {
 
         // Метод service, который возвращает JWT токен
         String token = loginService.signin(signInDTO);
+        bankAdapter.generate(userRepository.findUserByEmail(signInDTO.email()).get().getUserID());
 
         // Ответ с токеном
         Map<String, String> response = new HashMap<>();

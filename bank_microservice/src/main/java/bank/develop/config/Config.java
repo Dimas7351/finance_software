@@ -18,7 +18,9 @@ public class Config {
                                 "/swagger-ui/**",  // Swagger UI статические файлы
                                 "/v3/api-docs/**", // API-документация
                                 "/auth/**",
-                                "/test/**"// Ваши публичные эндпоинты авторизации
+                                "/test/**",
+                                "/generate/**",
+                                "/getTransactions/**"// Ваши публичные эндпоинты авторизации
                         ).permitAll()
                         .anyRequest().authenticated()
                 );
