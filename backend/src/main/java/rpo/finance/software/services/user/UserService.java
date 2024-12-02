@@ -18,13 +18,13 @@ public class UserService {
     }
 
     public Account getUserAccount(Long id) {
-        return userRepository.findUserByUserID(id)
+        return userRepository.findById(id)
                 .map(accountInfoMapper)
                 .orElseThrow(() -> new AccountNotFoundException("Invalid"));
     }
 
     public void deleteAccount(long id) {
-        User user = userRepository.findUserByUserID(id).orElseThrow(() -> new AccountNotFoundException("Account not found!"));
+        User user = userRepository.findById(id).orElseThrow(() -> new AccountNotFoundException("Account not found!"));
         userRepository.deleteById(id);
     }
 }

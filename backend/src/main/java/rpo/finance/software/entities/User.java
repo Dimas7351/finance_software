@@ -82,7 +82,5 @@ public class User {
     @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
     @Schema(description = "Список банковских интеграций пользователя.")
     private List<BankIntegration> bankIntegrations;
-
-
 }
 
