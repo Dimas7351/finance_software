@@ -20,5 +20,4 @@ public class TestController {
     public ResponseEntity<String> test() {
         return bankAdapter.bankTest();
     }
-
 }

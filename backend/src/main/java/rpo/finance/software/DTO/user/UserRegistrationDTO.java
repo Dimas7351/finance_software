@@ -6,7 +6,7 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 @Schema(description = "DTO для регистрации пользователей")
-public record UserRegistrationDTO (
+public record   UserRegistrationDTO (
         @NotBlank(message = "Имя не может быть пустым")
         @Size(min = 1, max = 100, message = "Имя должно содержать от 1 до 100 символов")
         @Schema(description = "Имя пользователя", example = "Карам", required = true)
