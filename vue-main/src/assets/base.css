@@ -2,13 +2,33 @@
   --color-text: black;
   --color-background: #e3e3e3;
   --color-border: #85bb65;
-  --color-card-border: rgba(133, 187, 101, 0.50);
+  --color-card-border: rgba(133, 187, 101, 0.5);
   --color-primary: var(--color-border);
   --input-color-border: rgba(0, 0, 0, 0.4);
   --input-border-radius: 5px;
   --card-container-border-radius: 25px;
   --color-background-disabled: #b9b9b9;
   --white: white;
+  --gfn-br: 16px;
+  --gfn-cpr: 17px;
+  --gfn-bg: rgb(208 213 216 / 50%);
+  --gfn-bc: rgb(228 230 231);
+  --gfn-bgt: 50%;
+  --gfn-title: var(--dark-gray);
+  --gfn-message: var(--dark);
+  --gfn-actions-bc: #c4c9ca;
+  --gfn-actions-c: #858f93;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --text: #212529;
 }
 
 @media (prefers-color-scheme: dark) {

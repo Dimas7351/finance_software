@@ -63,7 +63,7 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <ContainerCard header-text="Регистрация" footer-class="--w-100" :key="stepInfo.stepNumber">
+    <!-- <ContainerCard header-text="Регистрация" footer-class="--w-100" :key="stepInfo.stepNumber">
       <template #card-header>
         <ProgressBar :steps-count="3" :stepNumber="stepInfo.stepNumber" :is-back="isBack" />
       </template>
@@ -104,6 +104,7 @@ export default defineComponent({
           </div>
         </router-link>
       </template>
-    </ContainerCard>
+    </ContainerCard> -->
+    <router-view></router-view>
   </div>
 </template>
