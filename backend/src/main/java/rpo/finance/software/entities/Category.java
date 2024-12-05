@@ -16,11 +16,11 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
-    private Long categoryID;
+    private Long categoryId;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User userID;
+    private User userId;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
