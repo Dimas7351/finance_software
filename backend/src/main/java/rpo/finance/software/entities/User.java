@@ -1,5 +1,4 @@
 package rpo.finance.software.entities;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -23,8 +22,8 @@ public class User {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(name = "userID", example = "1", required = true, description = "Уникальный идентификатор пользователя.")
-    private Long userID;
+    @Schema(name = "userId", example = "1", required = true, description = "Уникальный идентификатор пользователя.")
+    private Long userId;
 
     @NotBlank
     @NotNull
@@ -67,21 +66,30 @@ public class User {
             description = "Пароль пользователя. Должен быть от 7 до 255 символов.")
     private String password;
 
-    @Column(name = "currency", length = 10)
+    @Column(name = "currency", length = 3)
     @Schema(name = "currency", example = "USD", description = "Предпочтительная валюта пользователя (по умолчанию USD).")
-    private String currency = "USD";
+    private String currency;
 
-    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "upload_type", length = 10)
+    @Schema(name = "upload_type", example = "manual", description = "")
+    private String uploadType;
+
+    @Column(name = "bank_name", length = 25)
+    @Schema(name = "bank_name", example = "SBER", description = "")
+    private String bankName;
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
     @Schema(description = "Список категорий, связанных с пользователем.")
     private List<Category> categories;
 
-    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
     @Schema(description = "Список транзакций, совершенных пользователем.")
     private List<Transaction> transactions;
 
-    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
     @Schema(description = "Список банковских интеграций пользователя.")
     private List<BankIntegration> bankIntegrations;
+
 
 
 }

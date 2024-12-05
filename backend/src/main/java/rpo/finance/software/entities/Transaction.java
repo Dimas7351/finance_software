@@ -18,7 +18,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transaction_id")
-    private Long transactionID;
+    private Long transactionId;
 
     @ManyToOne
     @JoinColumn(name = "user_id" ,nullable = false)
@@ -26,7 +26,7 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category categoryID;
+    private Category categoryId;
 
     @Column(name = "amount", nullable = false, precision = 12)
     private Double amount;

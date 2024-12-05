@@ -16,14 +16,14 @@ public class BankIntegration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "integration_id")
-    private Long integrationID;
+    private Long integrationId;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User userID;
+    private User userId;
 
-    @Column(name = "bankName", nullable = false, length = 100)
-    private String bank_name;
+    @Column(name = "bank_name", nullable = false, length = 100)
+    private String bankName;
 
     @Column(name = "keyAPI", nullable = false, length = 255)
     private String keyAPI;

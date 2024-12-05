@@ -6,6 +6,8 @@ CREATE TABLE users(
     date_of_birth DATE,
     is_verified BOOLEAN DEFAULT FALSE,
     password      VARCHAR(255) NOT NULL,
-    currency      VARCHAR(10) DEFAULT 'USD'
+    currency      VARCHAR(3)
+    upload_type   VARCHAR(10) CHECK (upload_type IN ('fromBank', 'manual'))
+    bank_name     VARCHAR(25)
 );
 
