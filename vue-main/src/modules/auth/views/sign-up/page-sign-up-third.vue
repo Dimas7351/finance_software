@@ -82,8 +82,6 @@ export default defineComponent({
       form.value.phone = result;
     };
 
-    // Phone Mask
-
     return {
       form,
       stepInfo,

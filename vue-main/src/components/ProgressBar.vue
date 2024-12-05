@@ -90,7 +90,7 @@ export default defineComponent({
   height: 12px;
   border-radius: 10px;
   background: var(--color-background-disabled);
-  transition: background-color 0.3s;
+  transition: background-color 0.5s;
 }
 
 .progress-bar__track {
@@ -103,7 +103,7 @@ export default defineComponent({
   border-radius: 10px;
   width: var(--progress);
   z-index: 1;
-  animation-duration: 0.3s;
+  animation-duration: 0.5s;
 }
 
 .next-animation {

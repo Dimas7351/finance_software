@@ -10,10 +10,14 @@ export default defineComponent({
   name: 'PageSignUpSecond',
   components: { ContainerCard, ProgressBar },
   setup() {
+    const router = useRouter();
+
     const form = ref({
       preferedCurrency: 'RUB',
       uploadType: 'fromBank',
     });
+
+    const direction = ref('');
 
     const stepInfo = computed(() => {
       return {
@@ -23,9 +27,22 @@ export default defineComponent({
       };
     });
 
+    const onNext = () => {
+      direction.value = 'next';
+      router.push({ name: stepInfo.value.next });
+    };
+
+    const onBack = () => {
+      direction.value = 'back';
+      router.push({ name: stepInfo.value.back });
+    };
+
     return {
       form,
       stepInfo,
+      direction,
+      onNext,
+      onBack,
     };
   },
 });
@@ -34,7 +51,7 @@ export default defineComponent({
 <template>
   <ContainerCard header-text="Регистрация" footer-class="--w-100" :key="stepInfo.stepNumber">
     <template #card-header>
-      <ProgressBar :steps-count="3" :stepNumber="stepInfo.stepNumber" />
+      <ProgressBar :steps-count="3" :stepNumber="stepInfo.stepNumber" :is-back="direction"/>
     </template>
     <template #card-body>
       <div style="width: 400px">

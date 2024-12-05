@@ -1,17 +1,18 @@
 <script>
+import { defineComponent, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import ContainerCard from '@/components/ContainerCard.vue';
 import ProgressBar from '@/components/ProgressBar.vue';
 import Tooltip from '@/components/Tooltip.vue';
 import AuthService from '@/modules/auth/service/auth.service';
 import { smallNotification } from '@/services/notification-service';
-import { defineComponent, ref } from 'vue';
-import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'PageSignUpFirst',
   components: { ContainerCard, ProgressBar, Tooltip },
   setup() {
     const router = useRouter();
+    const route = useRoute(); // Получаем текущий маршрут
 
     const stepInfo = ref({
       stepNumber: 1,
@@ -27,6 +28,8 @@ export default defineComponent({
       passwordConfirm: '',
     });
 
+    const direction = ref('');
+
     const onNext = () => {
       if (
         form.value.name &&
@@ -35,6 +38,7 @@ export default defineComponent({
         form.value.password &&
         form.value.passwordConfirm
       ) {
+        direction.value = 'next';
         AuthService.signUpSendStepOneInfo({ ...form.value }).then(() => {
           router.push({ name: stepInfo.value.next });
         });
@@ -43,10 +47,22 @@ export default defineComponent({
       }
     };
 
+    const onBack = () => {
+      direction.value = 'back';
+      router.push({ name: stepInfo.value.back });
+    };
+
+    const isGoingBack = route.name === stepInfo.value.back;
+    const isGoingForward = route.name === stepInfo.value.next;
+
     return {
       form,
       stepInfo,
+      direction,
       onNext,
+      onBack,
+      isGoingBack,
+      isGoingForward,
     };
   },
 });
@@ -55,7 +71,7 @@ export default defineComponent({
 <template>
   <ContainerCard header-text="Регистрация" footer-class="--w-100" :key="stepInfo.stepNumber">
     <template #card-header>
-      <ProgressBar :steps-count="3" :stepNumber="stepInfo.stepNumber" />
+      <ProgressBar :steps-count="3" :stepNumber="stepInfo.stepNumber" :is-back="direction"/>
     </template>
     <template #card-body>
       <div style="width: 344px">
