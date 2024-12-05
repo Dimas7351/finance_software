@@ -8,7 +8,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
-    <router-view />
+  <div class="container">
+    <router-view></router-view>
   </div>
 </template>

@@ -37,10 +37,20 @@ export const authRoutes = [
         component: () => import('@/modules/auth/views/login/page-login-layout.vue'),
         children: [
           {
+            path: '',
+            name: 'PageLogin',
+            component: () => import('@/modules/auth/views/login/page-login.vue'),
+          },
+          {
             path: 'password-recovery',
             name: 'PagePasswordRecovery',
             component: () => import('@/modules/auth/views/login/page-password-recovery.vue'),
           },
+          {
+            path: 'password-recovery-refresh',
+            name: 'PagePasswordRecoveryRefresh',
+            component: () => import('@/modules/auth/views/login/page-password-recovery-refresh.vue')
+          }
         ],
       },
     ],
