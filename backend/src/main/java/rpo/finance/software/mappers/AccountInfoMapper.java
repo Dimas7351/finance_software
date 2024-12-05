@@ -11,7 +11,7 @@ public class AccountInfoMapper implements Function<User, Account> {
 
     @Override
     public Account apply(User user) {
-        return new Account(user.getUserID(),
+        return new Account(user.getUserId(),
                 user.getName(),
                 user.getPhoneNumber(),
                 user.getBirthday(),

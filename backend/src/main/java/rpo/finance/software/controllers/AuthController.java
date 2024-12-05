@@ -4,12 +4,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rpo.finance.software.DTO.user.UserRegistrationDTO;
+import rpo.finance.software.DTO.user.RegistrationStep1DTO;
+import rpo.finance.software.DTO.user.RegistrationStep2DTO;
+import rpo.finance.software.DTO.user.RegistrationStep3DTO;
 import rpo.finance.software.DTO.user.UserSignInDTO;
 import rpo.finance.software.adapter.BankAdapter;
 import rpo.finance.software.repositories.UserRepository;
@@ -30,22 +33,54 @@ public class AuthController {
     private final BankAdapter bankAdapter;
     private final UserRepository userRepository;
 
-    @PostMapping("/signup")
-    @Operation(summary = "Данные для регистрации пользователя")
+    @PostMapping("/signup/first")
+    @Operation(summary = "Данные для регистрации пользователя, Шаг 1")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User registered successfully"),
+            @ApiResponse(responseCode = "200", description = "Шаг 1 завершён"),
             @ApiResponse(responseCode = "409",description = "Пользователь с таким email уже существует."),
             @ApiResponse(responseCode = "400",
                     description = "example:(\"name\": \"Имя должно содержать от 1 до 100 символов\")")
     })
-    public ResponseEntity<String> signup(@Valid @RequestBody UserRegistrationDTO registration) {
-        registrationService.registerUser(registration);
+    public ResponseEntity<String> reg1(@Valid @RequestBody RegistrationStep1DTO step1DTO, HttpSession session) {
+        registrationService.registerStep1(step1DTO,session);
 
-        return ResponseEntity.ok("Пользователь успешно зарегистрирован." +
-                " Пожалуйста, подтвердите свою учетную запись через ссылку, отправленную на вашу электронную почту.\n");
+        return ResponseEntity.ok("Шаг 1 завершён");
     }
 
 
+    @PostMapping("/signup/second")
+    @Operation(summary = "Данные для регистрации пользователя, Шаг 2",
+            description = "Здесь обрабатываются данные, введённые пользователем на шаге 2 регистрации. currency, uploadType.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Шаг 2 завершён. Данные успешно сохранены в сессии."),
+            @ApiResponse(responseCode = "409",
+                    description = "Invalid currency. Allowed values: RUB, USD, EUR, GBP."),
+            @ApiResponse(responseCode = "400",
+                    description = "Invalid currency. Allowed values: RUB, USD, EUR, GBP.")
+    })    public ResponseEntity<String> registerStep2(
+            @Valid @RequestBody RegistrationStep2DTO step2DTO, HttpSession session) {
+        registrationService.registerStep2(step2DTO, session);
+        return ResponseEntity.ok("Шаг 2 завершён.");
+    }
+
+    @PostMapping("/signup/third")
+    @Operation(summary = "Данные для регистрации пользователя, Шаг 3",
+            description = "Здесь обрабатываются данные, введённые пользователем на шаге 3 регистрации. bankName, phoneNumber.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Шаг 2 завершён. Данные успешно сохранены в сессии."),
+            @ApiResponse(responseCode = "409",
+                    description = "Конфликт данных. Например, пользователь уже зарегистрирован с такими данными."),
+            @ApiResponse(responseCode = "400",
+                    description = "Неверные или неполные данные. Возможно, некоторые поля не были заполнены или данные не соответствуют формату.")
+    })
+    public ResponseEntity<String> registerStep3(
+            @Valid @RequestBody RegistrationStep3DTO step3DTO, HttpSession session) {
+        registrationService.registerStep3(step3DTO, session);
+        return ResponseEntity.ok("Пользователь успешно зарегистрирован." +
+                " Пожалуйста, подтвердите свою учетную запись через ссылку, отправленную на вашу электронную почту.\n");
+    }
 
     @GetMapping("/verify")
     @Operation(
@@ -77,7 +112,7 @@ public class AuthController {
 
         // Метод service, который возвращает JWT токен
         String token = loginService.signin(signInDTO);
-        bankAdapter.generate(userRepository.findUserByEmail(signInDTO.email()).get().getUserID());
+        bankAdapter.generate(userRepository.findUserByEmail(signInDTO.email()).get().getUserId());
 
         // Ответ с токеном
         Map<String, String> response = new HashMap<>();

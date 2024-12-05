@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -33,7 +34,6 @@ public class User {
     private String name;
 
     @Column(name = "phone_number")
-    @NotBlank(message = "Номер телефона не может быть пустым")
     @Size(max = 18, message = "Номер телефона не должен превышать 18 символов")
     @Pattern(regexp = "(^\\+7|7|8)[0-9]{10}$|^\\+7\\s?\\(\\d{3}\\)\\s?\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{2}$",
             message = "Неверный формат номера телефона. Используйте формат +7 (XXX) XXX-XX-XX или 7XXXXXXXXXX.")
@@ -89,8 +89,6 @@ public class User {
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
     @Schema(description = "Список банковских интеграций пользователя.")
     private List<BankIntegration> bankIntegrations;
-
-
 
 }
 

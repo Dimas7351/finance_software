@@ -15,21 +15,21 @@ public class EmailService {
     private JavaMailSender mailSender;
 
     @Async
-    public void sendVerificationMail(String email, String token) {
+    public void sendVerificationMail(String name, String token) {
         String subject = "Подтвердите ваш аккаунт";
         String verificationUrl = "http://localhost:8080/auth/verify?token=" + token;
 
-        String htmlContent = buildEmail(email, verificationUrl);
+        String htmlContent = buildEmail(name, verificationUrl);
 
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-            helper.setTo(email);
+            helper.setTo(name);
             helper.setSubject(subject);
             helper.setText(htmlContent, true);
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            throw new IllegalStateException("Не удалось отправить email", e);
+            throw new IllegalStateException("Не удалось отправить name", e);
         }
     }
 

@@ -22,7 +22,7 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "user_id" ,nullable = false)
-    private User userID;
+    private User userId;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
