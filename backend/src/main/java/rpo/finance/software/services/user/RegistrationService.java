@@ -61,7 +61,7 @@ public class RegistrationService {
 
         ConfirmationToken token = tokenService.createToken(user);
 
-        emailService.sendVerificationMail(user.getName(),token.getToken());
+        emailService.sendVerificationMail(user.getEmail(),user.getName(),token.getToken());
 
         session.invalidate();
     }
@@ -106,6 +106,6 @@ public class RegistrationService {
         }
         tokenService.invalidateExistingTokens(user);
         ConfirmationToken newToken = tokenService.createToken(user);
-        emailService.sendVerificationMail(user.getEmail(),newToken.getToken());
+        emailService.sendVerificationMail(user.getEmail(),user.getName(),newToken.getToken());
     }
 }

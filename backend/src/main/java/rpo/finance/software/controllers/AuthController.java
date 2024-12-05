@@ -69,7 +69,7 @@ public class AuthController {
             description = "Здесь обрабатываются данные, введённые пользователем на шаге 3 регистрации. bankName, phoneNumber.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
-                    description = "Шаг 2 завершён. Данные успешно сохранены в сессии."),
+                    description = "Шаг 3 завершён. Данные успешно сохранены в сессии."),
             @ApiResponse(responseCode = "409",
                     description = "Конфликт данных. Например, пользователь уже зарегистрирован с такими данными."),
             @ApiResponse(responseCode = "400",

@@ -15,7 +15,7 @@ public class EmailService {
     private JavaMailSender mailSender;
 
     @Async
-    public void sendVerificationMail(String name, String token) {
+    public void sendVerificationMail(String email,String name, String token) {
         String subject = "Подтвердите ваш аккаунт";
         String verificationUrl = "http://localhost:8080/auth/verify?token=" + token;
 
@@ -24,12 +24,12 @@ public class EmailService {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-            helper.setTo(name);
+            helper.setTo(email);
             helper.setSubject(subject);
             helper.setText(htmlContent, true);
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            throw new IllegalStateException("Не удалось отправить name", e);
+            throw new IllegalStateException("Не удалось отправить email", e);
         }
     }
 
@@ -57,7 +57,7 @@ public class EmailService {
                 "        </tr>\n" +
                 "        <tr>\n" +
                 "            <td style=\"text-align:center;font-size:12px;color:#888;padding-top:20px;\">\n" +
-                "                © 2024 Ваша компания. Все права защищены.\n" +
+                "                © 2024 Finance-Software компания. Все права защищены.\n" +
                 "            </td>\n" +
                 "        </tr>\n" +
                 "    </table>\n" +
