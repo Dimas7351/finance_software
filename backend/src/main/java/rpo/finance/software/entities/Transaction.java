@@ -30,7 +30,7 @@ public class Transaction {
     private User userID;
 
     @JoinColumn(name = "category_id")
-    private String categoryId;
+    private Integer categoryId;
 
     @Column(name = "amount", precision = 12)
     private Double amount;
