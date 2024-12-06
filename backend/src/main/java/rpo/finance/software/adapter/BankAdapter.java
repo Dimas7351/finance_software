@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BankAdapter {
 
-    private final static String ur = "http://localhost:7070";
+    private final static String ur = "http://bank-microservice:7070";
 
     private final RestTemplate restTemplate = new RestTemplate();
 

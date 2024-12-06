@@ -1,5 +1,5 @@
 services:
-  finance_software:
+  finance-software:
     build: ./backend
     ports:
       - "8080:8080"
@@ -16,7 +16,7 @@ services:
     networks:
       - web
 
-  bank_microservice:
+  bank-microservice:
     build: ./bank_microservice
     ports:
       - "7070:7070"
@@ -25,7 +25,7 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
     depends_on:
-      - finance_software
+      - finance-software
     networks:
       - web
 
