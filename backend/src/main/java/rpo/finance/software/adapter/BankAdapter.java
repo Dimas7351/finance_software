@@ -36,6 +36,7 @@ public class BankAdapter {
     }
 
     public ResponseEntity<String> generate(Long userId){
+
         ResponseEntity<String> str = restTemplate.exchange(ur+"/generate/{userId}",
                 HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class, userId);
         System.out.println(str.getBody());
