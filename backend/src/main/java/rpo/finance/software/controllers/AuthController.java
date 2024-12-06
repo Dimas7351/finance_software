@@ -61,7 +61,7 @@ public class AuthController {
     })    public ResponseEntity<String> registerStep2(
             @Valid @RequestBody RegistrationStep2DTO step2DTO, HttpSession session) {
         registrationService.registerStep2(step2DTO, session);
-        return ResponseEntity.ok("Шаг 2 завершён.");
+        return ResponseEntity.ok("Шаг 2 завершён");
     }
 
     @PostMapping("/signup/third")

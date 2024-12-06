@@ -80,15 +80,4 @@ public class User {
     @Schema(name = "bank_name", example = "SBER", description = "")
     private String bankName;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Schema(description = "Список категорий, связанных с пользователем.")
-    private List<Category> categories;
-
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Schema(description = "Список транзакций, совершенных пользователем.")
-    private List<Transaction> transactions;
-
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Schema(description = "Список банковских интеграций пользователя.")
-    private List<BankIntegration> bankIntegrations;
 }

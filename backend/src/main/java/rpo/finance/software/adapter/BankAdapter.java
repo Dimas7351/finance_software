@@ -19,18 +19,6 @@ public class BankAdapter {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-
-    public ResponseEntity<String> bankTest(){
-        URI url = UriComponentsBuilder.fromHttpUrl(ur)
-                .path("/test")
-                .build()
-                .toUri();
-        ResponseEntity<String> str = restTemplate.exchange(url,
-                HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class);
-        System.out.println(str.getBody());
-        return str;
-    }
-
     public ResponseEntity<String> generate(Long userId){
         URI url = UriComponentsBuilder.fromHttpUrl(ur)
                 .path("/generate")
@@ -41,4 +29,5 @@ public class BankAdapter {
         System.out.println(str.getBody());
         return str;
     }
+
 }
