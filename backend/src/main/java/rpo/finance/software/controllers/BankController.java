@@ -17,7 +17,7 @@ public class BankController {
     private final BankAdapter bankAdapter;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<Transaction>> getTransactionsById(@PathVariable String userId) {
+    public ResponseEntity<List<Transaction>> getTransactionsById(@PathVariable Long userId) {
         return bankAdapter.getTransactions(userId);
     }
 

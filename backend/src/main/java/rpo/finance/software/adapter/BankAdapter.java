@@ -36,28 +36,27 @@ public class BankAdapter {
     }
 
     public ResponseEntity<String> generate(Long userId){
-        URI url = UriComponentsBuilder.fromHttpUrl(ur)
-                .path("/generate")
-                .build()
-                .toUri();
         ResponseEntity<String> str = restTemplate.exchange(ur+"/generate/{userId}",
                 HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class, userId);
         System.out.println(str.getBody());
         return str;
     }
 
-    public ResponseEntity<List<Transaction>> getTransactions(String userId){
+    public ResponseEntity<List<Transaction>> getTransactions(Long userId) {
         URI url = UriComponentsBuilder.fromHttpUrl(ur)
-                .path("/getTransactions/{userId}")
-                .build()
-                .toUri();
+                .path("/getTransactions/{userId}") // Шаблон с параметром {userId}
+                .buildAndExpand(userId) // Подставляем значение userId в шаблон
+                .toUri(); // Строим финальный URI
+
         ResponseEntity<List<Transaction>> str = restTemplate.exchange(
                 url, HttpMethod.GET, new HttpEntity<>(new HttpHeaders()),
-                new ParameterizedTypeReference<List<Transaction>>() {}
+                new ParameterizedTypeReference<>() {} // Указываем тип данных в ответе
         );
-        System.out.println(str.getBody());
-        return str;
+
+        System.out.println(str.getBody()); // Выводим тело ответа (список транзакций)
+        return str; // Возвращаем результат
     }
+
 
 
     public ResponseEntity<List<Transaction>> getTransactionsWithDate(DateTransactionDTO dto){
