@@ -10,12 +10,11 @@ import bank.develop.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @RequiredArgsConstructor
@@ -38,8 +37,6 @@ public class TransactionService {
         Long userID = dateTransactionDTO.userID();
         return transactionRepository.findAllByUserIDWithDate(userID, dateFrom, dateTo);
     }
-
-    private Random random = new Random();
 
     @Async
     public void generateTransactions(String userId) {
@@ -145,30 +142,6 @@ public class TransactionService {
         transactionRepository.saveAll(transactions);
     }
 
-
-    private LocalDateTime generateRandomDateTime(int month) {
-        int year = LocalDateTime.now().getYear();
-
-        LocalDateTime start = LocalDateTime.of(year, month, 1, 0, 0);
-
-        LocalDateTime end = start.plusMonths(1).minusSeconds(1);
-
-        long startSeconds = start.toEpochSecond(java.time.ZoneOffset.UTC);
-        long endSeconds = end.toEpochSecond(java.time.ZoneOffset.UTC);
-        long randomSeconds = ThreadLocalRandom.current().nextLong(startSeconds, endSeconds);
-
-        return LocalDateTime.ofEpochSecond(randomSeconds, 0, java.time.ZoneOffset.UTC);
-    }
-
-    private Double generateAmountOutcome() {
-        double amount = 500 + (30000 - 500) * random.nextDouble();
-        return Math.round(amount * 100.0) / 100.0;
-    }
-
-    private Double generateAmountIncome() {
-        double amount = 10000 + (100000 - 500) * random.nextDouble();
-        return Math.round(amount * 100.0) / 100.0;
-    }
 
     private LocalDateTime generateRandomDateTime(int month) {
         int year = LocalDateTime.now().getYear();
