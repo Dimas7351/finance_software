@@ -7,8 +7,8 @@ import jakarta.validation.constraints.Size;
 
 public record RegistrationStep3DTO(
         @NotBlank(message = "Bank name cannot be blank")
-        @Pattern(regexp = "TINKOFF|SBER|ALFA|VTB", message = "Invalid bank name. Allowed values: TINKOFF, SBER, ALFA, VTB.")
         @Schema(description = "Bank name", example = "TINKOFF", required = true)
+        @Pattern(regexp = "TINKOFF|SBER|ALFA|VTB", message = "Invalid bank name. Allowed values: TINKOFF, SBER, ALFA, VTB.")
         String bankName,
 
         @NotBlank(message = "Номер телефона не может быть пустым")
@@ -19,4 +19,9 @@ public record RegistrationStep3DTO(
         description = "Номер телефона пользователя. Должен быть в формате: +7 (XXX) XXX-XX-XX.")
         String phoneNumber
 ) {
+        public RegistrationStep3DTO {
+                if (bankName !=null){
+                        bankName = bankName.toUpperCase();
+                }
+        }
 }

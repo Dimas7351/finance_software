@@ -1,5 +1,5 @@
 package rpo.finance.software.entities;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 import java.time.LocalDate;
 import java.util.List;
@@ -74,7 +75,8 @@ public class User {
     @Schema(name = "upload_type", example = "manual", description = "")
     private String uploadType;
 
-    @Column(name = "bank_name", length = 25)
+    @Column(name = "bank_name")
+    @Pattern(regexp = "TINKOFF|SBER|ALFA|VTB", message = "Invalid bank name. Allowed values: TINKOFF, SBER, ALFA, VTB.")
     @Schema(name = "bank_name", example = "SBER", description = "")
     private String bankName;
 
@@ -89,6 +91,4 @@ public class User {
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
     @Schema(description = "Список банковских интеграций пользователя.")
     private List<BankIntegration> bankIntegrations;
-
 }
-

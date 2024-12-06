@@ -53,6 +53,7 @@ public class RegistrationService {
         session.setAttribute("user", user);
     }
 
+    @Transactional
     public void registerStep3(RegistrationStep3DTO userDTO, HttpSession session) {
         User user = getSessionUser(session);
         user.setBankName(userDTO.bankName());

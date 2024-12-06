@@ -7,7 +7,7 @@ import java.util.Random;
 
 public enum CategoryEnum {
 
-    FOOD, HEALTH, TRANSPORT, OTHERS;
+    FOOD, HEALTH, TRANSPORT,GIFTS,CAFE,EDUCATION,CLOTHES,SPORTS,TRANSFER, OTHERS;
 
     private static final List<CategoryEnum> VALUES =
             Collections.unmodifiableList(Arrays.asList(values()));
