@@ -29,14 +29,14 @@ public class TransactionService {
 
     public List<Transaction> getAllTransactions(String userId) {
         User user = userRepository.findById(Long.valueOf(userId)).orElseThrow();
-        return transactionRepository.findAllByUserID(user);
+        return transactionRepository.findAllByUserId(user);
     }
 
     public List<Transaction> getAllTransactionsWithDate(DateTransactionDTO dateTransactionDTO) {
         LocalDateTime dateTo = LocalDateTime.now();
         LocalDateTime dateFrom = dateTo.minusMonths(dateTransactionDTO.monthAmount());
-        Long userID = dateTransactionDTO.userID();
-        return transactionRepository.findAllByUserIDWithDate(userID, dateFrom, dateTo);
+        Long userId = dateTransactionDTO.userId();
+        return transactionRepository.findAllByUserIDWithDate(userId, dateFrom, dateTo);
     }
 
     @Async
@@ -53,7 +53,7 @@ public class TransactionService {
             // --sending money for home--
             for (int i = 0; i < 12; i++) {
                 transactions.add(Transaction.builder()
-                        .userID(user)
+                        .userId(user)
                         .categoryId(CategoryEnum.TRANSFER)
                         .amount(Double.valueOf(80000))
                         .type(String.valueOf(PurchaseTypeEnum.OUTCOME))
@@ -63,7 +63,7 @@ public class TransactionService {
             // --restaurants--
             for (int i = 0; i < 15; i++) {
                 transactions.add(Transaction.builder()
-                        .userID(user)
+                        .userId(user)
                         .categoryId(CategoryEnum.CAFE)
                         .amount(generateAmountOutcome())
                         .type(String.valueOf(PurchaseTypeEnum.OUTCOME))
@@ -74,7 +74,7 @@ public class TransactionService {
             //  --products--
             for (int i = 0; i < 23; i++) {
                 transactions.add(Transaction.builder()
-                        .userID(user)
+                        .userId(user)
                         .categoryId(CategoryEnum.FOOD)
                         .amount(generateAmountOutcome())
                         .type(String.valueOf(PurchaseTypeEnum.OUTCOME))
@@ -85,7 +85,7 @@ public class TransactionService {
             // --health--
             for (int i = 0; i < 4; i++) {
                 transactions.add(Transaction.builder()
-                        .userID(user)
+                        .userId(user)
                         .categoryId(CategoryEnum.HEALTH)
                         .amount(generateAmountOutcome())
                         .type(String.valueOf(PurchaseTypeEnum.OUTCOME))
@@ -96,7 +96,7 @@ public class TransactionService {
             //  --education--
             for (int i = 0; i < 1; i++) {
                 transactions.add(Transaction.builder()
-                        .userID(user)
+                        .userId(user)
                         .categoryId(CategoryEnum.EDUCATION)
                         .amount(generateAmountOutcome())
                         .type(String.valueOf(PurchaseTypeEnum.OUTCOME))
@@ -107,7 +107,7 @@ public class TransactionService {
             //  --sports--
             for (int i = 0; i < 2; i++) {
                 transactions.add(Transaction.builder()
-                        .userID(user)
+                        .userId(user)
                         .categoryId(CategoryEnum.SPORTS)
                         .amount(2999.99)
                         .type(String.valueOf(PurchaseTypeEnum.OUTCOME))
@@ -118,7 +118,7 @@ public class TransactionService {
             // --gifts--
             for (int i = 0; i < 1; i++) {
                 transactions.add(Transaction.builder()
-                        .userID(user)
+                        .userId(user)
                         .categoryId(CategoryEnum.GIFTS)
                         .amount(generateAmountOutcome())
                         .type(String.valueOf(PurchaseTypeEnum.OUTCOME))
@@ -133,7 +133,7 @@ public class TransactionService {
                 month = 12;
             }
             transactions.add(Transaction.builder()
-                    .userID(user)
+                    .userId(user)
                     .categoryId(null)
                     .amount(generateAmountIncome())
                     .type(String.valueOf(PurchaseTypeEnum.INCOME))

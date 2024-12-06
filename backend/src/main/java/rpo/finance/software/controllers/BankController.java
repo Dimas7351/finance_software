@@ -11,16 +11,17 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/getTransactions")
 public class BankController {
 
     private final BankAdapter bankAdapter;
 
-    @GetMapping("/getTransactions/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<List<Transaction>> getTransactionsById(@PathVariable String userId) {
         return bankAdapter.getTransactions(userId);
     }
 
-    @PostMapping("/getTransactions")
+    @PostMapping
     public ResponseEntity<List<Transaction>> getTransactionsByIdWithDate(@RequestBody DateTransactionDTO dateTransactionDto) {
         return bankAdapter.getTransactionsWithDate(dateTransactionDto);
     }

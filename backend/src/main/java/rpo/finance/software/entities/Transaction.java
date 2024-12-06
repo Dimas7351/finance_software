@@ -27,7 +27,7 @@ public class Transaction {
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "user_id" ,nullable = false)
-    private User userID;
+    private User userId;
 
     @JoinColumn(name = "category_id")
     private Integer categoryId;

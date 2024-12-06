@@ -70,7 +70,8 @@ public class BankAdapter {
 
         ResponseEntity<List<Transaction>> str = restTemplate.exchange(
                 url, HttpMethod.POST, requestEntity,
-                new ParameterizedTypeReference<List<Transaction>>() {}
+                new ParameterizedTypeReference<>() {
+                }
         );
         System.out.println(str.getBody());
         return str;

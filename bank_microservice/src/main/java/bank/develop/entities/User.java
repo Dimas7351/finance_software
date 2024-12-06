@@ -22,8 +22,8 @@ public class User {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(name = "userID", example = "1", required = true, description = "Уникальный идентификатор пользователя.")
-    private Long userID;
+    @Schema(name = "userId", example = "1", required = true, description = "Уникальный идентификатор пользователя.")
+    private Long userId;
 
     @NotBlank
     @NotNull
