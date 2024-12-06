@@ -1,11 +1,11 @@
 export const mainRoutes = [
   {
-    path: '/app',
+    path: '/app/budget',
     name: 'PageMainLayout',
     component: () => import('@/modules/app/views/page-main-layout.vue'),
     children: [
       {
-        path: 'budget',
+        path: '',
         name: 'PageBudget',
         component: () => import('@/modules/app/views/page-budget.vue'),
       },

@@ -28,10 +28,10 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="app-container">
     <TheHeader :activeCurrency="activeCurrency" @currency-change="setActiveCurrency" />
-    <TheBanner></TheBanner>
-    <div class="app-container">
+    <TheBanner/>
+    <div class="app-container__body">
       <router-view></router-view>
     </div>
   </div>
