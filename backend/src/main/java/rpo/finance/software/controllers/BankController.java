@@ -43,7 +43,7 @@ public class BankController {
 
         // Привязываем userId к запросу
         dateTransactionDto = new DateTransactionDTO(
-                Long.valueOf(userId),
+                userId,
                 dateTransactionDto.monthAmount()
         );
 
