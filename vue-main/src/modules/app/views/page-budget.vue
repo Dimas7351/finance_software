@@ -1,8 +1,8 @@
 <script>
 import { defineComponent, ref } from 'vue';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'; // Убираем Plugin
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'vue-chartjs';
-ChartJS.register(ArcElement, Tooltip, Legend);
+
 
 const centerTextPlugin = {
   id: 'centerTextPlugin',
@@ -24,6 +24,7 @@ const centerTextPlugin = {
 };
 
 ChartJS.register(centerTextPlugin);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default defineComponent({
   name: 'PageBudget',
@@ -151,7 +152,7 @@ export default defineComponent({
 
 <template>
   <div class="budget-wrapper">
-    <div class="--flex-row" style="width: 100%; margin: 0 0 20px 0">
+    <div class="--flex-row" style="width: 100%; margin: 0 0 30px 0">
       <div style="font-size: 24px; font-weight: 900; margin: 0 20px 0 0">Бюджет</div>
       <div class="--flex-row">
         <input
@@ -171,14 +172,14 @@ export default defineComponent({
     </div>
     <div class="charts-wrapper">
       <div class="budget-wrapper__column --first">
-        <div style="margin-bottom: 100px"><Doughnut :data="data" :options="options[0]" /></div>
+        <div style="margin-bottom: 50px"><Doughnut :data="data" :options="options[0]" /></div>
         <div><Doughnut :data="data" :options="options[0]" /></div>
       </div>
       <div class="budget-wrapper__column --main">
         <div><Doughnut :data="data" :options="options[1]" /></div>
       </div>
       <div class="budget-wrapper__column --second">
-        <div style="margin-bottom: 100px"><Doughnut :data="data" :options="options[0]" /></div>
+        <div style="margin-bottom: 50px"><Doughnut :data="data" :options="options[0]" /></div>
         <div><Doughnut :data="data" :options="options[0]" /></div>
       </div>
     </div>
