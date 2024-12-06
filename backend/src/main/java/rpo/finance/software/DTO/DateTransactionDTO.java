@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 public record DateTransactionDTO(
 
         @NotNull(message = "ID пользователя не может быть пустым")
-        @Schema(description = "ID пользователя, связанного с транзакцией", example = "1", required = true)
+        @Schema(hidden = true)
         Long userId,
 
         @NotNull(message = "Количество месяцев не может быть пустым")
