@@ -70,13 +70,6 @@ public class User {
     @Schema(name = "currency", example = "USD", description = "Предпочтительная валюта пользователя (по умолчанию USD).")
     private String currency = "USD";
 
-//    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @Schema(description = "Список транзакций, совершенных пользователем.")
-//    private List<Transaction> transactions;
-
-//    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @Schema(description = "Список банковских интеграций пользователя.")
-//    private List<BankIntegration> bankIntegrations;
 
 
 }
