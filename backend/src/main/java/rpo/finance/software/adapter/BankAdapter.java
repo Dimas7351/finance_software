@@ -41,4 +41,26 @@ public class BankAdapter {
         System.out.println(str.getBody());
         return str;
     }
+
+    public ResponseEntity<String> getTransactions(Long userId){
+        URI url = UriComponentsBuilder.fromHttpUrl(ur)
+                .path("/getTransactions/{userId}")
+                .build()
+                .toUri();
+        ResponseEntity<String> str = restTemplate.exchange(ur+"/getTransactions/{userId}",
+                HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class, userId);
+        System.out.println(str.getBody());
+        return str;
+    }
+
+    public ResponseEntity<String> getTransactionsById(){
+        URI url = UriComponentsBuilder.fromHttpUrl(ur)
+                .path("/getTransactions")
+                .build()
+                .toUri();
+        ResponseEntity<String> str = restTemplate.exchange(ur+"/getTransactions",
+                HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class);
+        System.out.println(str.getBody());
+        return str;
+    }
 }
