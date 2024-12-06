@@ -1,6 +1,7 @@
 package rpo.finance.software.adapter;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -8,8 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import rpo.finance.software.DTO.DateTransactionDTO;
+import rpo.finance.software.entities.Transaction;
 
 import java.net.URI;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,24 +46,32 @@ public class BankAdapter {
         return str;
     }
 
-    public ResponseEntity<String> getTransactions(Long userId){
+    public ResponseEntity<List<Transaction>> getTransactions(String userId){
         URI url = UriComponentsBuilder.fromHttpUrl(ur)
                 .path("/getTransactions/{userId}")
                 .build()
                 .toUri();
-        ResponseEntity<String> str = restTemplate.exchange(ur+"/getTransactions/{userId}",
-                HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class, userId);
+        ResponseEntity<List<Transaction>> str = restTemplate.exchange(
+                url, HttpMethod.GET, new HttpEntity<>(new HttpHeaders()),
+                new ParameterizedTypeReference<List<Transaction>>() {}
+        );
         System.out.println(str.getBody());
         return str;
     }
 
-    public ResponseEntity<String> getTransactionsById(){
+
+    public ResponseEntity<List<Transaction>> getTransactionsWithDate(DateTransactionDTO dto){
         URI url = UriComponentsBuilder.fromHttpUrl(ur)
                 .path("/getTransactions")
                 .build()
                 .toUri();
-        ResponseEntity<String> str = restTemplate.exchange(ur+"/getTransactions",
-                HttpMethod.POST, new HttpEntity<>(new HttpHeaders()), String.class);
+
+        HttpEntity<DateTransactionDTO> requestEntity = new HttpEntity<>(dto, new HttpHeaders());
+
+        ResponseEntity<List<Transaction>> str = restTemplate.exchange(
+                url, HttpMethod.POST, requestEntity,
+                new ParameterizedTypeReference<List<Transaction>>() {}
+        );
         System.out.println(str.getBody());
         return str;
     }
