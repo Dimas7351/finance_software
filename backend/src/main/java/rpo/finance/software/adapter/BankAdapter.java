@@ -19,6 +19,18 @@ public class BankAdapter {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
+
+    public ResponseEntity<String> bankTest(){
+        URI url = UriComponentsBuilder.fromHttpUrl(ur)
+                .path("/test")
+                .build()
+                .toUri();
+        ResponseEntity<String> str = restTemplate.exchange(url,
+                HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class);
+        System.out.println(str.getBody());
+        return str;
+    }
+
     public ResponseEntity<String> generate(Long userId){
         URI url = UriComponentsBuilder.fromHttpUrl(ur)
                 .path("/generate")
@@ -30,4 +42,25 @@ public class BankAdapter {
         return str;
     }
 
+    public ResponseEntity<String> getTransactions(Long userId){
+        URI url = UriComponentsBuilder.fromHttpUrl(ur)
+                .path("/getTransactions/{userId}")
+                .build()
+                .toUri();
+        ResponseEntity<String> str = restTemplate.exchange(ur+"/getTransactions/{userId}",
+                HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class, userId);
+        System.out.println(str.getBody());
+        return str;
+    }
+
+    public ResponseEntity<String> getTransactionsById(){
+        URI url = UriComponentsBuilder.fromHttpUrl(ur)
+                .path("/getTransactions")
+                .build()
+                .toUri();
+        ResponseEntity<String> str = restTemplate.exchange(ur+"/getTransactions",
+                HttpMethod.POST, new HttpEntity<>(new HttpHeaders()), String.class);
+        System.out.println(str.getBody());
+        return str;
+    }
 }
