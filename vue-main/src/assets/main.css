@@ -324,6 +324,239 @@ a.arrow-icon {
   text-decoration: none;
 }
 
+@font-face {
+  font-family: 'icon-font';
+  src: url('/font/icon-font.woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-family: 'icon-font' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-lists:before {
+  content: '\e905';
+}
+.icon-bar_chart:before {
+  content: '\e906';
+}
+.icon-target:before {
+  content: '\e907';
+}
+.icon-credit_card:before {
+  content: '\e908';
+}
+.icon-account_balance_wallet:before {
+  content: '\e909';
+}
+.icon-euro:before {
+  content: '\e900';
+}
+.icon-gbp:before {
+  content: '\e901';
+}
+.icon-info:before {
+  content: '\e902';
+}
+.icon-rub:before {
+  content: '\e903';
+}
+.icon-usd:before {
+  content: '\e904';
+}
+.icon-grocery:before {
+  content: '\e90a';
+}
+.icon-restaurant:before {
+  content: '\e90b';
+}
+.icon-cardio_load:before {
+  content: '\e90c';
+}
+.icon-help:before {
+  content: '\e90d';
+}
+.icon-add_2:before {
+  content: '\e90e';
+}
+.icon-apparel:before {
+  content: '\e90f';
+}
+.icon-subscriptions:before {
+  content: '\e910';
+}
+.icon-featured_seasonal_and_gifts:before {
+  content: '\e911';
+}
+.icon-fitness_center:before {
+  content: '\e912';
+}
+.icon-account_circle:before {
+  content: '\e913';
+}
+.icon-logout:before {
+  content: '\e914';
+}
+.icon-linked_services:before {
+  content: '\e915';
+}
+.icon-bus_railway:before {
+  content: '\e916';
+}
+.icon-confirmation_number:before {
+  content: '\e917';
+}
+.icon-cottage:before {
+  content: '\e918';
+}
+.icon-group:before {
+  content: '\e919';
+}
+.icon-school:before {
+  content: '\e91a';
+}
+.icon-lists:before {
+  content: '\e905';
+}
+.icon-bar_chart:before {
+  content: '\e906';
+}
+.icon-target:before {
+  content: '\e907';
+}
+.icon-credit_card:before {
+  content: '\e908';
+}
+.icon-account_balance_wallet:before {
+  content: '\e909';
+}
+.icon-app-logo:before {
+  content: '\e91b';
+  color: #85bb65;
+}
+.icon-settings:before {
+  content: '\e91c';
+}
+
+/* App Layout */
+
+.app-container {
+  position: relative;
+  top: 124px;
+  width: 100%;
+  height: 100%;
+  padding: 0 180px;
+  overflow: hidden;
+}
+
+/* Header */
+
+.header-wrapper {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 34px;
+  padding: 0 180px;
+  background-color: var(--app-bg);
+  z-index: 999;
+}
+
+.currencies {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.currencies-item {
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.currencies-item .icon:hover {
+  color: var(--color-primary);
+}
+
+.currencies-item.active {
+  color: var(--color-primary);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-actions__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.header-actions__username {
+  color: var(--color-text);
+  user-select: none;
+}
+
+.header-actions .icon:hover {
+  color: var(--color-primary);
+}
+
+/* Banner */
+
+.banner-wrapper {
+  position: fixed;
+  top: 34px;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  padding: 0 180px;
+  background-color: var(--white);
+  border-top: 3px solid var(--color-primary);
+  border-bottom: 3px solid var(--color-primary);
+  z-index: 999;
+}
+
+.app-info {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  gap: 15px;
+}
+
+.app-info__title {
+  display: flex;
+  align-items: center;
+  font-size: 35px;
+  font-family: 'Roboto Condensed';
+}
+
+.dropdown-button {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-button .icon {
+  font-size: 24px;
+}
+
 /* Notification */
 
 .notification__list {
@@ -578,18 +811,6 @@ a.arrow-icon {
 }
 .notification__item.--danger.--timer > .notification__timeline {
   background-color: var(--danger);
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  background-repeat: no-repeat;
-  background-clip: border-box;
-  background-size: contain;
-}
-
-.icon-info {
-  background-image: url('/icon-info.svg');
 }
 
 /* Login */

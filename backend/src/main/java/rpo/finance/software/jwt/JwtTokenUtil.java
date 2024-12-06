@@ -27,9 +27,10 @@ public class JwtTokenUtil {
      * @param email - Email пользователя, который будет записан в токен.
      * @return строка JWT токена.
      */
-    public String generateToken(String email) {
+    public String generateToken(Long userId, String email) {
         return Jwts.builder()
                 .setSubject(email) // Устанавливаем email как "субъект" токена
+                .claim("userId", userId)
                 .setIssuedAt(new Date()) // Дата создания токена
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)) // Дата истечения срока действия токена
                 .signWith(key, SignatureAlgorithm.HS256) // Подписываем токен с использованием алгоритма HMAC SHA-256
@@ -53,6 +54,22 @@ public class JwtTokenUtil {
             return claims.getSubject(); // Возвращаем субъект (email или другую информацию)
         } catch (JwtException | IllegalArgumentException e) {
             // Обрабатываем исключения: неправильный или просроченный токен
+            throw new RuntimeException("Невалидный или просроченный токен", e);
+        }
+    }
+
+    //метод для извлечения userId
+    public String extractUserId(String token) {
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(key)  // Устанавливаем ключ для валидации токена
+                    .build()  // Строим парсер
+                    .parseClaimsJws(token)  // Парсим токен
+                    .getBody();  // Извлекаем claims из токена
+
+            // Получаем userId из claims
+            return claims.get("userId", String.class);
+        } catch (JwtException | IllegalArgumentException e) {
             throw new RuntimeException("Невалидный или просроченный токен", e);
         }
     }

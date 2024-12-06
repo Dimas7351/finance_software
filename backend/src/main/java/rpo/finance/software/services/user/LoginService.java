@@ -30,6 +30,6 @@ public class LoginService {
             throw new InvalidCredentialsException("Неверные учетные данные");
         }
         // Генерация JWT токена
-        return jwtTokenUtil.generateToken(user.getEmail());
+        return jwtTokenUtil.generateToken(user.getUserId(), user.getEmail());
     }
 }
