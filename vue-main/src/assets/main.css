@@ -450,7 +450,7 @@ a.arrow-icon {
   color: #85bb65;
 }
 .icon-settings:before {
-  content: "\e91c";
+  content: '\e91c';
 }
 
 /* App Layout */
@@ -474,6 +474,8 @@ a.arrow-icon {
   width: 100%;
   height: 34px;
   padding: 0 180px;
+  background-color: var(--app-bg);
+  z-index: 999;
 }
 
 .currencies {
@@ -529,6 +531,7 @@ a.arrow-icon {
   background-color: var(--white);
   border-top: 3px solid var(--color-primary);
   border-bottom: 3px solid var(--color-primary);
+  z-index: 999;
 }
 
 .app-info {
@@ -551,7 +554,7 @@ a.arrow-icon {
 }
 
 .dropdown-button .icon {
-  font-size: 30px;
+  font-size: 24px;
 }
 
 /* Notification */

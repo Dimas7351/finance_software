@@ -143,12 +143,12 @@ export default {
 .dropdown-item {
   display: flex;
   align-items: center;
-  width: 228px;
-  padding: 6px 12px;
+  width: 200px;
+  padding: 4px 12px;
   margin-bottom: 3px;
   clear: both;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 17px;
   color: var(--color-text);
   text-align: inherit;
   white-space: nowrap;
