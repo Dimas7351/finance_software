@@ -1,4 +1,4 @@
-package bank.develop.bank_microservice;
+package bank.develop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

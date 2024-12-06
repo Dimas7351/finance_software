@@ -1,3 +1,4 @@
 target/
 finance_software.iml
-.idea/
+.idea
+.gitignore

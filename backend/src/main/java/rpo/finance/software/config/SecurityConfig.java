@@ -37,7 +37,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/swagger-ui/**",  // Swagger UI статические файлы
                                 "/v3/api-docs/**", // API-документация
-                                "/auth/**"        // Ваши публичные эндпоинты авторизации
+                                "/auth/**",
+                                "/test/**"// Ваши публичные эндпоинты авторизации
                         ).permitAll()
                         .anyRequest().authenticated()
 

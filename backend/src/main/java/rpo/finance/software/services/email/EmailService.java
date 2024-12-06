@@ -15,11 +15,11 @@ public class EmailService {
     private JavaMailSender mailSender;
 
     @Async
-    public void sendVerificationMail(String email, String token) {
+    public void sendVerificationMail(String email,String name, String token) {
         String subject = "Подтвердите ваш аккаунт";
         String verificationUrl = "http://localhost:8080/auth/verify?token=" + token;
 
-        String htmlContent = buildEmail(email, verificationUrl);
+        String htmlContent = buildEmail(name, verificationUrl);
 
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
@@ -57,7 +57,7 @@ public class EmailService {
                 "        </tr>\n" +
                 "        <tr>\n" +
                 "            <td style=\"text-align:center;font-size:12px;color:#888;padding-top:20px;\">\n" +
-                "                © 2024 Ваша компания. Все права защищены.\n" +
+                "                © 2024 Finance-Software компания. Все права защищены.\n" +
                 "            </td>\n" +
                 "        </tr>\n" +
                 "    </table>\n" +

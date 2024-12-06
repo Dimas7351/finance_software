@@ -1,9 +1,15 @@
-package rpo.finance.software.entities;
+package bank.develop.entities;
+
+import bank.develop.enums.CategoryEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import java.time.LocalDateTime;
 
@@ -21,19 +27,20 @@ public class Transaction {
     private Long transactionId;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "user_id" ,nullable = false)
-    private User userId;
+    private User userID;
 
-    @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category categoryId;
+    private CategoryEnum categoryId;
 
-    @Column(name = "amount", nullable = false, precision = 12)
+    @Column(name = "amount", precision = 12)
     private Double amount;
 
     @Column(name = "type", nullable = false, length = 10)
     private String type;
 
-    @Column(name = "date", nullable = false)
+    @Past
+    @Column(name = "date")
     private LocalDateTime date;
 }

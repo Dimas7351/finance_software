@@ -1,5 +1,4 @@
-package rpo.finance.software.entities;
-
+package bank.develop.entities;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -7,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,8 +22,8 @@ public class User {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(name = "userId", example = "1", required = true, description = "Уникальный идентификатор пользователя.")
-    private Long userId;
+    @Schema(name = "userID", example = "1", required = true, description = "Уникальный идентификатор пользователя.")
+    private Long userID;
 
     @NotBlank
     @NotNull
@@ -35,6 +33,7 @@ public class User {
     private String name;
 
     @Column(name = "phone_number")
+    @NotBlank(message = "Номер телефона не может быть пустым")
     @Size(max = 18, message = "Номер телефона не должен превышать 18 символов")
     @Pattern(regexp = "(^\\+7|7|8)[0-9]{10}$|^\\+7\\s?\\(\\d{3}\\)\\s?\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{2}$",
             message = "Неверный формат номера телефона. Используйте формат +7 (XXX) XXX-XX-XX или 7XXXXXXXXXX.")
@@ -67,28 +66,18 @@ public class User {
             description = "Пароль пользователя. Должен быть от 7 до 255 символов.")
     private String password;
 
-    @Column(name = "currency", length = 3)
+    @Column(name = "currency", length = 10)
     @Schema(name = "currency", example = "USD", description = "Предпочтительная валюта пользователя (по умолчанию USD).")
-    private String currency;
+    private String currency = "USD";
 
-    @Column(name = "upload_type", length = 10)
-    @Schema(name = "upload_type", example = "manual", description = "")
-    private String uploadType;
+//    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @Schema(description = "Список транзакций, совершенных пользователем.")
+//    private List<Transaction> transactions;
 
-    @Column(name = "bank_name")
-    @Pattern(regexp = "TINKOFF|SBER|ALFA|VTB", message = "Invalid bank name. Allowed values: TINKOFF, SBER, ALFA, VTB.")
-    @Schema(name = "bank_name", example = "SBER", description = "")
-    private String bankName;
+//    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @Schema(description = "Список банковских интеграций пользователя.")
+//    private List<BankIntegration> bankIntegrations;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Schema(description = "Список категорий, связанных с пользователем.")
-    private List<Category> categories;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Schema(description = "Список транзакций, совершенных пользователем.")
-    private List<Transaction> transactions;
-
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Schema(description = "Список банковских интеграций пользователя.")
-    private List<BankIntegration> bankIntegrations;
 }
+

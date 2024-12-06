@@ -1,11 +1,14 @@
 package rpo.finance.software.services.user;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rpo.finance.software.DTO.user.UserRegistrationDTO;
+import rpo.finance.software.DTO.user.RegistrationStep1DTO;
+import rpo.finance.software.DTO.user.RegistrationStep2DTO;
+import rpo.finance.software.DTO.user.RegistrationStep3DTO;
 import rpo.finance.software.entities.ConfirmationToken;
 import rpo.finance.software.entities.User;
 import rpo.finance.software.exceptions.AccountAlreadyVerifiedException;
@@ -30,11 +33,7 @@ public class RegistrationService {
     private final EmailService emailService;
 
 
-    public void saveUser(User user) {
-        userRepository.save(user);
-    }
-    @Transactional
-    public void registerUser(UserRegistrationDTO userDTO) {
+    public void registerStep1(RegistrationStep1DTO userDTO, HttpSession session) {
         if (userRepository.findUserByEmail(userDTO.email()).isPresent()) {
             throw new EmailAlreadyExistException("Пользователь с таким email уже существует.");
         }
@@ -42,11 +41,38 @@ public class RegistrationService {
 
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
+        session.setAttribute("user", user);
+        //userRepository.save(user);
+
+    }
+
+    public void registerStep2(RegistrationStep2DTO userDTO, HttpSession session) {
+        User user  = getSessionUser(session);
+        user.setCurrency(userDTO.currency());
+        user.setUploadType(userDTO.uploadType());
+        session.setAttribute("user", user);
+    }
+
+    @Transactional
+    public void registerStep3(RegistrationStep3DTO userDTO, HttpSession session) {
+        User user = getSessionUser(session);
+        user.setBankName(userDTO.bankName());
+        user.setPhoneNumber(userDTO.phoneNumber());
         userRepository.save(user);
 
         ConfirmationToken token = tokenService.createToken(user);
 
-        emailService.sendVerificationMail(user.getEmail(),token.getToken());
+        emailService.sendVerificationMail(user.getEmail(),user.getName(),token.getToken());
+
+        session.invalidate();
+    }
+
+    private User getSessionUser(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            throw new IllegalStateException("Session expired. Please restart the registration.");
+        }
+        return user;
     }
 
     @Transactional
@@ -66,10 +92,11 @@ public class RegistrationService {
 
         User user = confirmationToken.getUser();
         user.setIsVerified(true);
-        saveUser(user);
+        userRepository.save(user);
 
         return "Аккаунт успешно подтверждён!";
     }
+
 
     @Transactional
     public void resendVerificationToken(String email){
@@ -80,6 +107,6 @@ public class RegistrationService {
         }
         tokenService.invalidateExistingTokens(user);
         ConfirmationToken newToken = tokenService.createToken(user);
-        emailService.sendVerificationMail(user.getEmail(),newToken.getToken());
+        emailService.sendVerificationMail(user.getEmail(),user.getName(),newToken.getToken());
     }
 }

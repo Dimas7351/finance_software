@@ -27,7 +27,6 @@ services:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - web
-
 networks:
   web:
     name: web
