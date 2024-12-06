@@ -24,10 +24,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/finance_software_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
-      SPRING_FLYWAY_ENABLED: "true"
-      SPRING_FLYWAY_URL: jdbc:postgresql://db:5432/finance_software_db
-      SPRING_FLYWAY_USER: postgres
-      SPRING_FLYWAY_PASSWORD: postgres
     depends_on:
       - finance_software
     networks:
@@ -41,7 +37,7 @@ services:
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./backend/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     networks:
       - web
 networks:
