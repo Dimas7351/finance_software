@@ -57,7 +57,9 @@ export default defineComponent({
         <i class="icon icon-account_circle"></i>
         <span class="header-actions__username"> Test User </span>
       </div>
-      <i class="icon icon-logout"></i>
+      <router-link :to="{name: 'PageGreetings'}">
+        <i class="icon icon-logout"></i>
+      </router-link>
     </div>
   </header>
 </template>

@@ -12,5 +12,5 @@ export default {
 </script>
 
 <template>
-  <div>asd</div>
+  <div class="--in-work">==== В разработычах ====</div>
 </template>

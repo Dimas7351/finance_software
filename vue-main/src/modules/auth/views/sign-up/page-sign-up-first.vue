@@ -32,11 +32,12 @@ export default defineComponent({
 
     const onNext = () => {
       if (
-        form.value.name &&
-        form.value.email &&
-        form.value.login &&
-        form.value.password &&
-        form.value.passwordConfirm
+        form.value.name ||
+        form.value.email ||
+        form.value.login ||
+        form.value.password ||
+        form.value.passwordConfirm ||
+        form.value.password !== form.value.passwordConfirm
       ) {
         direction.value = 'next';
         AuthService.signUpSendStepOneInfo({ ...form.value }).then(() => {
