@@ -11,8 +11,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class TransactionService {
 
     private final UserRepository userRepository;
     private final TransactionRepository transactionRepository;
-
+    private Random random = new Random();
     @Async
     public void generateTransactions(String userId) {
         User user = userRepository.findById(Long.valueOf(userId)).orElseThrow();
@@ -29,6 +31,7 @@ public class TransactionService {
             Transaction transaction = Transaction.builder()
                     .userID(user)
                     .categoryId(CategoryEnum.randomCategory())
+                    .amount(random.nextDouble())
                     .type(PurchaseTypeEnum.randomPurchaseType().toString())
                     .build();
             transactions.add(transaction);

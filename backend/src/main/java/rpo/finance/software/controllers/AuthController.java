@@ -66,14 +66,16 @@ public class AuthController {
 
     @PostMapping("/signup/third")
     @Operation(summary = "Данные для регистрации пользователя, Шаг 3",
-            description = "Здесь обрабатываются данные, введённые пользователем на шаге 3 регистрации. bankName, phoneNumber.")
+            description = "Здесь обрабатываются данные, введённые пользователем на шаге" +
+                    " 3 регистрации. bankName, phoneNumber.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Шаг 3 завершён. Данные успешно сохранены в сессии."),
             @ApiResponse(responseCode = "409",
                     description = "Конфликт данных. Например, пользователь уже зарегистрирован с такими данными."),
             @ApiResponse(responseCode = "400",
-                    description = "Неверные или неполные данные. Возможно, некоторые поля не были заполнены или данные не соответствуют формату.")
+                    description = "Неверные или неполные данные. Возможно, некоторые" +
+                            " поля не были заполнены или данные не соответствуют формату.")
     })
     public ResponseEntity<String> registerStep3(
             @Valid @RequestBody RegistrationStep3DTO step3DTO, HttpSession session) {
@@ -85,7 +87,8 @@ public class AuthController {
     @GetMapping("/verify")
     @Operation(
             summary = "Подтвердить учетную запись по токену",
-            description = "Этот эндпоинт позволяет пользователю подтвердить свою учетную запись с помощью токена, который был отправлен на почту."
+            description = "Этот эндпоинт позволяет пользователю подтвердить свою учетную" +
+                    " запись с помощью токена, который был отправлен на почту."
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Учетная запись успешно подтверждена."),
@@ -107,7 +110,6 @@ public class AuthController {
             @ApiResponse(responseCode = "200", description = "Успешный вход"),
             @ApiResponse(responseCode = "401", description = "Неверные учетные данные")
     })
-
     public ResponseEntity<Map<String, String>> signin(@Valid @RequestBody UserSignInDTO signInDTO) {
 
         // Метод service, который возвращает JWT токен
