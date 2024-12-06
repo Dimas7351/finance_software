@@ -59,7 +59,7 @@ public class BankAdapter {
                 .build()
                 .toUri();
         ResponseEntity<String> str = restTemplate.exchange(ur+"/getTransactions",
-                HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class);
+                HttpMethod.POST, new HttpEntity<>(new HttpHeaders()), String.class);
         System.out.println(str.getBody());
         return str;
     }
