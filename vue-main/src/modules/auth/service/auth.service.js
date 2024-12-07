@@ -4,12 +4,12 @@ import store from '@/store';
 
 export default {
   signUpSendStepOneInfo(form, fullForm) {
-    console.log(fullForm)
+    console.log(fullForm);
     return axios
       .post('/auth/signup/first', form)
       .then((res) => {
         store.dispatch('updateStepOne', fullForm);
-        console.log(res.data)
+        console.log(res.data);
       })
       .catch((err) => {
         smallNotification('danger', { title: 'Произошла ошибка!' });
@@ -35,6 +35,17 @@ export default {
       })
       .catch((err) => {
         smallNotification('danger', { title: 'Произошла ошибка!' });
+        return Promise.reject(err);
+      });
+  },
+  login(form) {
+    return axios
+      .post('/auth/login', form)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        smallNotification('danger', { title: 'Произошла ошибка' });
         return Promise.reject(err);
       });
   },

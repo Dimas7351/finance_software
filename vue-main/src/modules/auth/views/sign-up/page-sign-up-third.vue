@@ -47,7 +47,6 @@ export default defineComponent({
       }
     };
 
-    // Phone Mask
     const prefixNumber = (str) => {
       if (str === '7') {
         return '7 (';
