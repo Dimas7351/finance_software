@@ -5,16 +5,18 @@ import AuthService from '@/modules/auth/service/auth.service';
 import { smallNotification } from '@/services/notification-service';
 import { useRouter } from 'vue-router';
 import { defineComponent, ref, computed } from 'vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'PageSignUpSecond',
   components: { ContainerCard, ProgressBar },
   setup() {
     const router = useRouter();
+    const store = useStore();
 
     const form = ref({
-      preferedCurrency: 'RUB',
-      uploadType: 'fromBank',
+      preferedCurrency: store.getters.getStepTwo?.currency || 'RUB',
+      uploadType: store.getters.getStepTwo?.uploadType || 'fromBank',
     });
 
     const direction = ref('');
@@ -29,7 +31,12 @@ export default defineComponent({
 
     const onNext = () => {
       direction.value = 'next';
-      router.push({ name: stepInfo.value.next });
+      AuthService.signUpSendStepTwoInfo({
+        currency: form.value.preferedCurrency,
+        uploadType: form.value.uploadType,
+      }).then(() => {
+        router.push({ name: stepInfo.value.next });
+      });
     };
 
     const onBack = () => {
@@ -51,7 +58,7 @@ export default defineComponent({
 <template>
   <ContainerCard header-text="Регистрация" footer-class="--w-100" :key="stepInfo.stepNumber">
     <template #card-header>
-      <ProgressBar :steps-count="3" :stepNumber="stepInfo.stepNumber" :is-back="direction"/>
+      <ProgressBar :steps-count="3" :stepNumber="stepInfo.stepNumber" :is-back="direction" />
     </template>
     <template #card-body>
       <div style="width: 400px">
@@ -153,19 +160,19 @@ export default defineComponent({
         </div>
       </router-link>
 
-      <router-link
+      <div
+        @click.prevent="onNext"
         class="button button-sm"
         v-if="form.uploadType !== undefined && form.uploadType === 'manual'"
-        :to="{ name: stepInfo.next }"
       >
         Завершить
-      </router-link>
+      </div>
 
-      <router-link v-else :to="{ name: stepInfo.next }">
+      <div v-else @click.prevent="onNext">
         <div class="arrow-icon">
           <i class="arrow-right"></i>
         </div>
-      </router-link>
+      </div>
     </template>
   </ContainerCard>
 </template>

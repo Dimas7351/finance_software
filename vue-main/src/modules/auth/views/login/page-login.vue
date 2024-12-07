@@ -62,7 +62,7 @@ export default defineComponent({
         </div>
       </template>
       <template #card-footer>
-        <router-link :to="{ name: 'PageMainLayout' }" class="button button-sm"> Войти </router-link>
+        <router-link :to="{ name: 'PageBudget' }" class="button button-sm"> Войти </router-link>
       </template>
     </ContainerCard>
   </div>

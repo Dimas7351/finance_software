@@ -7,6 +7,8 @@ import AuthService from '@/modules/auth/service/auth.service';
 import { smallNotification } from '@/services/notification-service';
 import { useRouter } from 'vue-router';
 import { defineComponent, ref } from 'vue';
+import { useStore } from 'vuex';
+import router from '@/router';
 
 export default defineComponent({
   name: 'PageSignUpThird',
@@ -19,17 +21,31 @@ export default defineComponent({
   },
 
   setup() {
+    const store = useStore();
     const form = ref({
-      bankName: '',
-      phone: '',
+      bankName: store.getters.getStepThree?.bankName || 'TINKOFF',
+      phone: store.getters.getStepThree?.phoneNumber || '',
     });
 
     const stepInfo = ref({
       stepNumber: 3,
       back: 'PageSignUpSecond',
-      next: 'PageMainLayout',
+      next: 'PageBudget',
       lastStep: true,
     });
+
+    const onNext = () => {
+      if (form.value.bankName && form.value.phone) {
+        AuthService.signUpSendStepThreeInfo({
+          bankName: form.value.bankName,
+          phoneNumber: form.value.phone,
+        }).then(() => {
+          router.push({ name: stepInfo.value.next });
+        });
+      } else {
+        smallNotification('danger', { title: 'Заполните все поля!' });
+      }
+    };
 
     // Phone Mask
     const prefixNumber = (str) => {
@@ -86,6 +102,7 @@ export default defineComponent({
       form,
       stepInfo,
       formatPhone,
+      onNext,
     };
   },
 });

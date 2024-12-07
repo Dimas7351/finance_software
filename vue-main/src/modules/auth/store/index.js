@@ -8,6 +8,7 @@ export const authStore = {
   },
   mutations: {
     setStepOne(state, data) {
+      console.log(data);
       state.signUp.stepOne = data;
     },
     setStepTwo(state, data) {
@@ -19,13 +20,14 @@ export const authStore = {
   },
   actions: {
     updateStepOne({ commit }, data) {
-      commit('setStepOne', data);
+      console.log(data);
+      commit('setStepOne', {...data});
     },
     updateStepTwo({ commit }, data) {
-      commit('setStepTwo', data);
+      commit('setStepTwo', {...data});
     },
     updateStepThree({ commit }, data) {
-      commit('setStepThree', data);
+      commit('setStepThree', {...data});
     },
   },
   getters: {

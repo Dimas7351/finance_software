@@ -8,6 +8,13 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 export default defineConfig({
   server: {
     port: 8045,
+    proxy: {
+      '/auth': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/auth/, '/auth'),
+      },
+    },
   },
   plugins: [vue(), vueDevTools()],
   resolve: {
