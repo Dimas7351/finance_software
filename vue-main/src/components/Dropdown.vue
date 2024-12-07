@@ -97,7 +97,7 @@ export default {
       button,
       wrapper,
       btnClass: 'dropdown-button',
-      position: 'center',
+      position: 'left',
       noCarret: false,
       disabled: false,
       btnIcon: 'icon icon-lists',

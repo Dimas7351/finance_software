@@ -488,7 +488,7 @@ a.arrow-icon {
   justify-content: space-between;
   width: 100%;
   height: 34px;
-  padding: 0 180px;
+  padding: 0 80px;
   background-color: var(--white);
   z-index: 999;
 }
@@ -542,7 +542,7 @@ a.arrow-icon {
   height: 90px;
   display: flex;
   align-items: center;
-  padding: 0 180px;
+  padding: 0 80px;
   background-color: var(--white);
   border-top: 3px solid var(--color-primary);
   border-bottom: 3px solid var(--color-primary);
