@@ -1,5 +1,6 @@
 <script>
 import { defineComponent, ref } from 'vue';
+import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
 import ContainerCard from '@/components/ContainerCard.vue';
 import ProgressBar from '@/components/ProgressBar.vue';
@@ -12,7 +13,7 @@ export default defineComponent({
   components: { ContainerCard, ProgressBar, Tooltip },
   setup() {
     const router = useRouter();
-    const route = useRoute(); // Получаем текущий маршрут
+    const route = useRoute();
 
     const stepInfo = ref({
       stepNumber: 1,
@@ -20,13 +21,17 @@ export default defineComponent({
       next: 'PageSignUpSecond',
     });
 
+    const store = useStore();
+
     const form = ref({
-      name: '',
-      email: '',
-      login: '',
-      password: '',
-      passwordConfirm: '',
+      name: store.getters.getStepOne?.name || '',
+      email: store.getters.getStepOne?.email || '',
+      login: store.getters.getStepOne?.login || '',
+      password: store.getters.getStepOne?.password || '',
+      passwordConfirm: store.getters.getStepOne?.passwordConfirm || '',
     });
+
+    let errors = ref({});
 
     const direction = ref('');
 
@@ -36,12 +41,34 @@ export default defineComponent({
         form.value.email &&
         form.value.login &&
         form.value.password &&
-        form.value.passwordConfirm
+        form.value.passwordConfirm &&
+        form.value.password === form.value.passwordConfirm
       ) {
+        if (
+          form.value.password !== form.value.passwordConfirm &&
+          form.value.password &&
+          form.value.passwordConfirm
+        ) {
+          smallNotification('danger', { title: 'Пароль и подтверждение пароля не совпадают!' });
+          errors.value = {
+            passwordConfirm: 'Пароли не совпадают',
+          };
+          return;
+        }
         direction.value = 'next';
-        AuthService.signUpSendStepOneInfo({ ...form.value }).then(() => {
-          router.push({ name: stepInfo.value.next });
-        });
+        AuthService.signUpSendStepOneInfo({
+          name: form.value.name,
+          email: form.value.email,
+          password: form.value.password,
+        }, form.value)
+          .then(() => {
+            router.push({ name: stepInfo.value.next });
+          })
+          .catch((err) => {
+            console.log(err);
+            errors.value = { ...err };
+            console.log(errors.value);
+          });
       } else {
         smallNotification('danger', { title: 'Заполните все поля!' });
       }
@@ -56,6 +83,7 @@ export default defineComponent({
     const isGoingForward = route.name === stepInfo.value.next;
 
     return {
+      errors,
       form,
       stepInfo,
       direction,
@@ -71,14 +99,19 @@ export default defineComponent({
 <template>
   <ContainerCard header-text="Регистрация" footer-class="--w-100" :key="stepInfo.stepNumber">
     <template #card-header>
-      <ProgressBar :steps-count="3" :stepNumber="stepInfo.stepNumber" :is-back="direction"/>
+      <ProgressBar :steps-count="3" :stepNumber="stepInfo.stepNumber" :is-back="direction" />
     </template>
     <template #card-body>
       <div style="width: 344px">
         <div class="form-group">
           <label for="name"> Имя </label>
           <div class="--flex-row --w-100">
-            <input id="name" class="form-input" v-model="form.name" />
+            <input
+              id="name"
+              class="form-input"
+              :class="{ '--has-error': errors.name }"
+              v-model="form.name"
+            />
             <Tooltip :tooltip-font-size="'14px'" width="300px" position="right">
               <template #element>
                 <span class="question-icon --ml-3">?</span>
@@ -86,17 +119,28 @@ export default defineComponent({
               <template #content> Будем знать, как к вам обращаться </template>
             </Tooltip>
           </div>
+          <div class="--error" v-if="errors.name">
+            {{ errors.name }}
+          </div>
         </div>
         <div class="form-group">
           <label for="email">Адрес электронной почты</label>
           <div class="--flex-row --w-100">
-            <input id="email" class="form-input" v-model="form.email" />
+            <input
+              id="email"
+              class="form-input"
+              :class="{ '--has-error': errors.email }"
+              v-model="form.email"
+            />
             <Tooltip :tooltip-font-size="'14px'" width="300px" position="right">
               <template #element>
                 <span class="question-icon --ml-3">?</span>
               </template>
               <template #content> Используем его для восстановления доступа к аккаунту </template>
             </Tooltip>
+          </div>
+          <div class="--error" v-if="errors.email">
+            {{ errors.email }}
           </div>
         </div>
         <div class="form-group">
@@ -117,7 +161,13 @@ export default defineComponent({
         <div class="form-group">
           <label for="password">Пароль</label>
           <div class="--flex-row --w-100">
-            <input type="password" id="password" class="form-input" v-model="form.password" />
+            <input
+              type="password"
+              id="password"
+              class="form-input"
+              :class="{ '--has-error': errors.password }"
+              v-model="form.password"
+            />
             <Tooltip :tooltip-font-size="'14px'" width="350px" position="right">
               <template #element>
                 <span class="question-icon --ml-3">?</span>
@@ -128,6 +178,9 @@ export default defineComponent({
               </template>
             </Tooltip>
           </div>
+          <div class="--error" v-if="errors.password">
+            {{ errors.password }}
+          </div>
         </div>
         <div class="form-group">
           <label for="passwordConfirm">Повторите пароль</label>
@@ -136,6 +189,7 @@ export default defineComponent({
               type="password"
               id="passwordConfirm"
               class="form-input"
+              :class="{ '--has-error': errors.passwordConfirm }"
               v-model="form.passwordConfirm"
             />
             <Tooltip :tooltip-font-size="'14px'" width="350px" position="right">
@@ -146,6 +200,9 @@ export default defineComponent({
                 Введите пароль еще раз, чтобы избежать ошибки при вводе
               </template>
             </Tooltip>
+          </div>
+          <div class="--error" v-if="errors.passwordConfirm">
+            {{ errors.passwordConfirm }}
           </div>
         </div>
       </div>

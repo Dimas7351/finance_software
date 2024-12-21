@@ -3,22 +3,24 @@ import { smallNotification } from '@/services/notification-service';
 import store from '@/store';
 
 export default {
-  signUpSendStepOneInfo(form) {
+  signUpSendStepOneInfo(form, fullForm) {
+    console.log(fullForm);
     return axios
-      .post('/signup/first', form)
+      .post('/auth/signup/first', form)
       .then((res) => {
-        store.dispatch('setStepOne', form);
+        store.dispatch('updateStepOne', fullForm);
+        console.log(res.data);
       })
       .catch((err) => {
         smallNotification('danger', { title: 'Произошла ошибка!' });
-        return Promise.reject(err);
+        return Promise.reject(err.response.data);
       });
   },
   signUpSendStepTwoInfo(form) {
     return axios
-      .post('/signup/second', form)
+      .post('/auth/signup/second', form)
       .then((res) => {
-        store.dispatch('setStepTwo', form);
+        store.dispatch('updateStepTwo', form);
       })
       .catch((err) => {
         smallNotification('danger', { title: 'Произошла ошибка!' });
@@ -27,12 +29,23 @@ export default {
   },
   signUpSendStepThreeInfo(form) {
     return axios
-      .post('/signup/third', form)
+      .post('/auth/signup/third', form)
       .then((res) => {
-        store.dispatch('setStepThree', form);
+        store.dispatch('updateStepThree', form);
       })
       .catch((err) => {
         smallNotification('danger', { title: 'Произошла ошибка!' });
+        return Promise.reject(err);
+      });
+  },
+  login(form) {
+    return axios
+      .post('/auth/login', form)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        smallNotification('danger', { title: 'Произошла ошибка' });
         return Promise.reject(err);
       });
   },

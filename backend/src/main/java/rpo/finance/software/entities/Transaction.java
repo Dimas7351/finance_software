@@ -1,6 +1,6 @@
-package bank.develop.entities;
+package rpo.finance.software.entities;
 
-import bank.develop.enums.CategoryEnum;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
@@ -8,8 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
 import java.time.LocalDateTime;
 
@@ -32,7 +30,7 @@ public class Transaction {
     private User userId;
 
     @JoinColumn(name = "category_id")
-    private CategoryEnum categoryId;
+    private String categoryId;
 
     @Column(name = "amount", precision = 12)
     private Double amount;

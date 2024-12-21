@@ -24,8 +24,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String header = request.getHeader("Authorization");
 
-        if (header != null && header.startsWith("Bearer ")) {
-            String token = header.substring(7);
+        if (header != null && header.startsWith("")) {
+            String token = header.substring(0);
             try {
                 String email = jwtTokenUtil.validateToken(token);
                 UsernamePasswordAuthenticationToken authenticationToken =

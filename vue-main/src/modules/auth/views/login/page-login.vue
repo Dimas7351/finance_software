@@ -1,6 +1,9 @@
 <script>
 import ContainerCard from '@/components/ContainerCard.vue';
 import { defineComponent, ref } from 'vue';
+import { smallNotification } from '@/services/notification-service';
+import AuthService from '@/modules/auth/service/auth.service';
+import router from '@/router';
 
 export default defineComponent({
   name: 'PageLogin',
@@ -11,8 +14,22 @@ export default defineComponent({
       password: '',
     });
 
+    const onNext = () => {
+      // if (form.value.login && form.value.password) {
+      //   AuthService.login({
+      //     email: form.value.login,
+      //     password: form.value.password,
+      //   }).then(() => {
+          router.push({ name: 'PageBudget' });
+      //   });
+      // } else {
+      //   smallNotification('danger', { title: 'Заполните все поля!' });
+      // }
+    };
+
     return {
       form,
+      onNext,
     };
   },
 });
@@ -62,7 +79,9 @@ export default defineComponent({
         </div>
       </template>
       <template #card-footer>
-        <router-link :to="{ name: 'PageMainLayout' }" class="button button-sm"> Войти </router-link>
+        <div @click.prevent="onNext">
+          <div class="button button-sm">Войти</div>
+        </div>
       </template>
     </ContainerCard>
   </div>

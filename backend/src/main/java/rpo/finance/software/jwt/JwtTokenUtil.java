@@ -3,10 +3,7 @@ package rpo.finance.software.jwt;
 import java.security.Key;
 import java.util.Date;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
 import org.springframework.stereotype.Component;
@@ -51,7 +48,7 @@ public class JwtTokenUtil {
                     .parseClaimsJws(token) // Проверяем токен и извлекаем JWS Claims
                     .getBody(); // Получаем тело токена (Claims)
 
-            return claims.getSubject(); // Возвращаем субъект (email или другую информацию)
+            return claims.getSubject(); // Возвращаем субъект (email)
         } catch (JwtException | IllegalArgumentException e) {
             // Обрабатываем исключения: неправильный или просроченный токен
             throw new RuntimeException("Невалидный или просроченный токен", e);
@@ -59,16 +56,16 @@ public class JwtTokenUtil {
     }
 
     //метод для извлечения userId
-    public String extractUserId(String token) {
+    public Long extractUserId(String token) {
         try {
             Claims claims = Jwts.parser()
-                    .setSigningKey(key)  // Устанавливаем ключ для валидации токена
-                    .build()  // Строим парсер
+                    .setSigningKey(key)  // Устанавливаем ключ для верификации
+                    .build()
                     .parseClaimsJws(token)  // Парсим токен
-                    .getBody();  // Извлекаем claims из токена
+                    .getBody();  // Получаем тело (claims) токена
 
-            // Получаем userId из claims
-            return claims.get("userId", String.class);
+            // Извлекаем userId из claims
+            return claims.get("userId", Long.class);  // Возвращаем userId
         } catch (JwtException | IllegalArgumentException e) {
             throw new RuntimeException("Невалидный или просроченный токен", e);
         }

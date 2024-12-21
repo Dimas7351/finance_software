@@ -22,8 +22,8 @@ public class User {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(name = "userID", example = "1", required = true, description = "Уникальный идентификатор пользователя.")
-    private Long userID;
+    @Schema(name = "userId", example = "1", required = true, description = "Уникальный идентификатор пользователя.")
+    private Long userId;
 
     @NotBlank
     @NotNull
@@ -70,6 +70,7 @@ public class User {
     @Schema(name = "currency", example = "USD", description = "Предпочтительная валюта пользователя (по умолчанию USD).")
     private String currency = "USD";
 
+<<<<<<< HEAD
 //    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @Schema(description = "Список транзакций, совершенных пользователем.")
 //    private List<Transaction> transactions;
@@ -77,5 +78,9 @@ public class User {
 //    @OneToMany(mappedBy = "userID", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @Schema(description = "Список банковских интеграций пользователя.")
 //    private List<BankIntegration> bankIntegrations;
+=======
+
+
+>>>>>>> 0a93790018ed1e6ea303052d891b9a6a5050b984
 }
 

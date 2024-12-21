@@ -14,7 +14,7 @@ export default defineComponent({
     <ContainerCard header-text="Здравствуйте!" card-class="--greetings" footer-class="--greetings">
       <template #card-body>
         <span class="--user-select-none">
-          Рады приветствовать вас в приложении “”! Здесь вы сможете получить детальную аналитику по
+          Рады приветствовать вас в приложении FinanceAN! <br>Здесь вы сможете получить детальную аналитику по
           своим банковским аккаунтам, получить прогнозы на текущий месяц, советы по экономии и
           другое. Приступим!
         </span>
