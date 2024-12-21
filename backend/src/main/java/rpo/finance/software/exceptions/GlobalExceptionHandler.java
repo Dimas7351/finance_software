@@ -39,13 +39,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGenericException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Произошла непредвиденная ошибка (" + ex.getMessage()  + "), Пожалуйста, попробуйте позже.");
+                .body( ex.getMessage());
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Произошла непредвиденная ошибка (" + ex.getMessage()  + "), Пожалуйста, попробуйте позже.");
+                .body(ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

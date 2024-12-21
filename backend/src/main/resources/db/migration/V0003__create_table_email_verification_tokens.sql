@@ -4,5 +4,5 @@ create table email_verification_tokens(
     created_at TIMESTAMP NOT NULL ,
     expires_at TIMESTAMP  NOT NULL,
     confirmed_at TIMESTAMP,
-    user_id BIGINT NOT NULL REFERENCES users(user_id)
+    user_id BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE
 );
